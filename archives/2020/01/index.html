@@ -19,7 +19,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
+    hostname: new URL('http://mhibio.github.io').hostname,
     root: '/',
     scheme: 'Gemini',
     version: '7.7.0',
@@ -49,14 +49,14 @@
   <meta name="description" content="king hacker">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2020/01/index.html">
+<meta property="og:url" content="http://mhibio.github.io/archives/2020/01/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="king hacker">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="mhibio">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/01/">
+<link rel="canonical" href="http://mhibio.github.io/archives/2020/01/">
 
 
 <script id="page-configurations">
@@ -148,7 +148,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">1</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">2</span></a>
 
   </li>
   </ul>
@@ -176,13 +176,33 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <span class="collection-header">Um..! 1 post. Keep on posting.</span>
+        <span class="collection-header">Um..! 2 posts in total. Keep on posting.</span>
       </div>
 
       
     <div class="collection-year">
       <h1 class="collection-header">2020</h1>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-01-30T06:34:25+09:00"
+              content="2020-01-30">
+          01-30
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/01/30/second/" itemprop="url">
+            <span itemprop="name">second</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -278,7 +298,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -448,7 +468,7 @@ window.addEventListener('pjax:success', () => {
       quicklink({
         timeout: 3000,
         priority: true,
-        ignores: [uri => uri.includes('#'),uri => uri == 'http://yoursite.com/archives/2020/01/',]
+        ignores: [uri => uri.includes('#'),uri => uri == 'http://mhibio.github.io/archives/2020/01/',]
       });
       });
   </script>
