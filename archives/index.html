@@ -25,9 +25,9 @@
     version: '7.7.0',
     exturl: false,
     sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":false,"style":"mac"},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
@@ -158,6 +158,8 @@
     </header>
 
     
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -195,7 +197,7 @@
 
       <h2 class="post-title">
           <a class="post-title-link" href="/2020/01/30/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
+            <span itemprop="name">hello-world</span>
           </a>
       </h2>
 
@@ -355,6 +357,8 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
+
   <script>
 var pjax = new Pjax({
   selectors: [
@@ -414,6 +418,8 @@ window.addEventListener('pjax:success', () => {
 </script>
 
 
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
 
 
   
