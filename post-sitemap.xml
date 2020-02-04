@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>http://mhibio.github.io/2020/02/04/hitcon-2016-secret-holder/</loc>
+        <lastmod>2020-02-04T08:44:29.237Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://mhibio.github.io/2020/01/30/pwnable-tw-starbound/</loc>
-        <lastmod>2020-01-30T12:27:48.647Z</lastmod>
+        <lastmod>2020-02-04T07:05:44.793Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
