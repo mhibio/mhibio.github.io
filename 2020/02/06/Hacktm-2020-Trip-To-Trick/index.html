@@ -57,7 +57,7 @@
 <meta property="og:description" content="[ Hacktm 2020 ] Trip To Trick hmm… FILE STREAM MASTER~ ¶binary summary  Setcontext Rop File Stream just simple orw">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-05T20:05:20.000Z">
-<meta property="article:modified_time" content="2020-02-05T21:05:07.621Z">
+<meta property="article:modified_time" content="2020-02-07T06:50:40.885Z">
 <meta property="article:author" content="mhibio">
 <meta property="article:tag" content="hacktm">
 <meta property="article:tag" content="file stream">
@@ -220,10 +220,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-02-06 05:05:20 / Modified: 06:05:07" itemprop="dateCreated datePublished" datetime="2020-02-06T05:05:20+09:00">2020-02-06</time>
+              <time title="Created: 2020-02-06 05:05:20" itemprop="dateCreated datePublished" datetime="2020-02-06T05:05:20+09:00">2020-02-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-07 15:50:40" itemprop="dateModified" datetime="2020-02-07T15:50:40+09:00">2020-02-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -299,7 +305,7 @@
 <h3 id="Nohack"><a class="header-anchor" href="#Nohack">¶</a>Nohack</h3>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int nohack()</span><br><span class="line">{</span><br><span class="line">  <span class="keyword">if</span> ( (stdout + 2208) &amp; 0xFFF )</span><br><span class="line">  {</span><br><span class="line">    puts(<span class="string">"mprotect error"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(1);</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">return</span> mprotect(&amp;stdout[10]._IO_write_end, 0x700uLL, 1);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p><code>stdout</code>의 <code>_IO_write_end</code>부터 <code>0x700</code>만큼 <code>Read Permission</code>만 준다.<br>
--&gt; <code>_IO_file_jumps overwrite</code>가 불가능하다.</p>
+-&gt; <code>_IO_str_jumps</code>을 이용한 <code>vtable bypass</code>가 불가능하다.</p>
 <h3 id="Main"><a class="header-anchor" href="#Main">¶</a>Main</h3>
 <ul>
 <li>libc leak 줌</li>
@@ -309,24 +315,31 @@
 <h2 id="Exploit"><a class="header-anchor" href="#Exploit">¶</a>Exploit</h2>
 <h3 id="Exploit-Flow"><a class="header-anchor" href="#Exploit-Flow">¶</a>Exploit Flow</h3>
 <h4 id="3줄-요약"><a class="header-anchor" href="#3줄-요약">¶</a>3줄 요약</h4>
-<p><code>stdout</code>의 <code>vtable filed</code>를 <code>write</code>권한이 남아있는 <code>_IO_helper_jumps</code>로 돌리고,<br>
+<p><code>stdout</code>의 <code>vtable filed</code>를 <code>write</code>권한이 남아있는 <code>_IO_helper_jumps</code>로 돌리고,  ( <code>vtable bypass</code> )<br>
 <code>_IO_helper_jumps</code>의 함수들은 <code>setcontext+53</code>으로 <code>overwrite</code><br>
 그후 <code>rop</code>와 <code>orw</code></p>
 <h4 id="Input"><a class="header-anchor" href="#Input">¶</a>Input</h4>
 <p><code>Input</code>을 총 4번 줄 수 있음</p>
+<h5 id="aaw1"><a class="header-anchor" href="#aaw1">¶</a>aaw1</h5>
 <ul>
 <li><code>_IO_buf_base</code>를 <code>stdin</code>으로 조작 - (<code>_IO_buf_end</code>변경을 위해서)</li>
 </ul>
 <blockquote>
-<p>이제부터 <code>input</code>은 <code>stdout</code>으로 들어감</p>
+<p>이제부터 <code>input</code>은 <code>stdin</code>으로 들어감</p>
 </blockquote>
-<br>
+<h5 id="aaw2-1"><a class="header-anchor" href="#aaw2-1">¶</a>aaw2 - 1</h5>
 <ul>
 <li><code>_IO_buf_base</code>를 <code>stdout</code>으로, <code>_IO_buf_end</code>를 충분한 크기로 조작 ( <code>stdin + 0x2000</code> )</li>
+</ul>
+<blockquote>
+<p>이제부터 <code>input</code>은 <code>stdout</code>으로 들어감</p>
+</blockquote>
+<h5 id="aaw2-2"><a class="header-anchor" href="#aaw2-2">¶</a>aaw2 - 2</h5>
+<ul>
 <li><code>vtable</code>덮고 나머지 <code>payload</code>적어줌</li>
 </ul>
 <blockquote>
-<p><code>fclose</code> -&gt; <code>_IO_new_fclose</code> -&gt; <code>_IO_new_file_close_it</code> -&gt; <code>call   QWORD PTR [ vtable+136 ]</code> -&gt; <code>_IO_helper_jumps+136</code> -&gt; <code>rop - mprotect</code> -&gt; <code>orw</code></p>
+<p><code>fclose</code> -&gt; <code>_IO_new_fclose</code> -&gt; <code>_IO_new_file_close_it</code> -&gt; <code>call   QWORD PTR [ vtable+0x88 ]</code> -&gt; <code>_IO_helper_jumps+0x88</code> -&gt; <code>rop - mprotect</code> -&gt; <code>orw</code></p>
 </blockquote>
 <h3 id="IO-new-file-close-it"><a class="header-anchor" href="#IO-new-file-close-it">¶</a>_IO_new_file_close_it</h3>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">. . .   </span><br><span class="line"></span><br><span class="line"><span class="number">0x00007f7060e93ee9</span> &lt;+<span class="number">89</span>&gt;:   jbe    <span class="number">0x7f7060e93fe0</span> &lt;_IO_new_file_close_it+<span class="number">336</span>&gt;</span><br><span class="line"><span class="number">0x00007f7060e93eef</span> &lt;+<span class="number">95</span>&gt;:   mov    rdi,rbx</span><br><span class="line"><span class="number">0x00007f7060e93ef2</span> &lt;+<span class="number">98</span>&gt;:   call   QWORD PTR [rbp+<span class="number">0x88</span>]</span><br><span class="line">. . .</span><br></pre></td></tr></tbody></table></figure>
@@ -451,7 +464,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">[ Hacktm 2020 ] Trip To Trick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-summary"><span class="nav-number">1.1.</span> <span class="nav-text">¶binary summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analyze"><span class="nav-number">1.2.</span> <span class="nav-text">¶Analyze</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mitigation"><span class="nav-number">1.2.1.</span> <span class="nav-text">¶Mitigation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seccomp"><span class="nav-number">1.2.2.</span> <span class="nav-text">¶Seccomp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nohack"><span class="nav-number">1.2.3.</span> <span class="nav-text">¶Nohack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Main"><span class="nav-number">1.2.4.</span> <span class="nav-text">¶Main</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">¶Exploit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-Flow"><span class="nav-number">1.3.1.</span> <span class="nav-text">¶Exploit Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3줄-요약"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">¶3줄 요약</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">¶Input</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO-new-file-close-it"><span class="nav-number">1.3.2.</span> <span class="nav-text">¶_IO_new_file_close_it</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setcontext-53"><span class="nav-number">1.3.3.</span> <span class="nav-text">¶setcontext+53</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-Code"><span class="nav-number">1.3.4.</span> <span class="nav-text">¶Exploit Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flag"><span class="nav-number">1.4.</span> <span class="nav-text">¶Flag</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">[ Hacktm 2020 ] Trip To Trick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-summary"><span class="nav-number">1.1.</span> <span class="nav-text">¶binary summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analyze"><span class="nav-number">1.2.</span> <span class="nav-text">¶Analyze</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mitigation"><span class="nav-number">1.2.1.</span> <span class="nav-text">¶Mitigation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seccomp"><span class="nav-number">1.2.2.</span> <span class="nav-text">¶Seccomp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nohack"><span class="nav-number">1.2.3.</span> <span class="nav-text">¶Nohack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Main"><span class="nav-number">1.2.4.</span> <span class="nav-text">¶Main</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">¶Exploit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-Flow"><span class="nav-number">1.3.1.</span> <span class="nav-text">¶Exploit Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3줄-요약"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">¶3줄 요약</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">¶Input</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#aaw1"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">¶aaw1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aaw2-1"><span class="nav-number">1.3.1.2.2.</span> <span class="nav-text">¶aaw2 - 1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aaw2-2"><span class="nav-number">1.3.1.2.3.</span> <span class="nav-text">¶aaw2 - 2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO-new-file-close-it"><span class="nav-number">1.3.2.</span> <span class="nav-text">¶_IO_new_file_close_it</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setcontext-53"><span class="nav-number">1.3.3.</span> <span class="nav-text">¶setcontext+53</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-Code"><span class="nav-number">1.3.4.</span> <span class="nav-text">¶Exploit Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flag"><span class="nav-number">1.4.</span> <span class="nav-text">¶Flag</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
