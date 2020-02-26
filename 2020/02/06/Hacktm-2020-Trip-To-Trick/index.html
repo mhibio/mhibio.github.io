@@ -57,7 +57,7 @@
 <meta property="og:description" content="[ Hacktm 2020 ] Trip To Trick hmm… FILE STREAM MASTER~ ¶binary summary  Setcontext Rop File Stream just simple orw">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-05T20:05:20.000Z">
-<meta property="article:modified_time" content="2020-02-07T06:50:40.885Z">
+<meta property="article:modified_time" content="2020-02-26T15:31:12.451Z">
 <meta property="article:author" content="mhibio">
 <meta property="article:tag" content="hacktm">
 <meta property="article:tag" content="file stream">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-07 15:50:40" itemprop="dateModified" datetime="2020-02-07T15:50:40+09:00">2020-02-07</time>
+                <time title="Modified: 2020-02-27 00:31:12" itemprop="dateModified" datetime="2020-02-27T00:31:12+09:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>5.7k</span>
+              <span>5.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -304,7 +304,9 @@
 <p><code>orw</code>로 <code>flag</code>읽어야 한듯싶다.</p>
 <h3 id="Nohack"><a class="header-anchor" href="#Nohack">¶</a>Nohack</h3>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int nohack()</span><br><span class="line">{</span><br><span class="line">  <span class="keyword">if</span> ( (stdout + 2208) &amp; 0xFFF )</span><br><span class="line">  {</span><br><span class="line">    puts(<span class="string">"mprotect error"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(1);</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">return</span> mprotect(&amp;stdout[10]._IO_write_end, 0x700uLL, 1);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><code>stdout</code>의 <code>_IO_write_end</code>부터 <code>0x700</code>만큼 <code>Read Permission</code>만 준다.<br>
+<p><code>&amp;stdout[10]._IO_write_end</code>부터 <code>0x700</code>만큼 <code>Read Permission</code>만 준다.<br>
+위 영역은 <code>&lt;_IO_wfile_jumps_mmap+160&gt;</code>이란 <code>영역 + @</code> 인데<br>
+쉽게 생각해서<code>_libc_IO_vtables</code>의 권한을 <code>Read Permission</code>만 준다는 이야기이다.<br>
 -&gt; <code>_IO_str_jumps</code>을 이용한 <code>vtable bypass</code>가 불가능하다.</p>
 <h3 id="Main"><a class="header-anchor" href="#Main">¶</a>Main</h3>
 <ul>
