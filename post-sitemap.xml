@@ -8,8 +8,24 @@
     </url>
 
     <url>
+        <loc>http://mhibio.github.io/2020/02/28/codegate-2018-7amebox1/</loc>
+        <lastmod>2020-02-27T23:03:54.617Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://mhibio.github.io/2020/02/06/Hacktm-2020-Trip-To-Trick/</loc>
-        <lastmod>2020-02-26T15:31:12.451Z</lastmod>
+        <lastmod>2020-02-27T22:16:01.613Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://mhibio.github.io/2020/02/04/hacktm-2020-obey-the-rules/</loc>
+        <lastmod>2020-02-27T22:15:49.668Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -26,14 +42,6 @@
     <url>
         <loc>http://mhibio.github.io/2020/02/04/hitcon-2016-sleepy-holder/</loc>
         <lastmod>2020-02-04T22:07:32.583Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://mhibio.github.io/2020/02/04/hacktm-2020-obey-the-rules/</loc>
-        <lastmod>2020-02-04T16:58:08.295Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
