@@ -57,7 +57,7 @@
 <meta property="og:description" content="[ d^3 2019 ] babyrop funny~ ¶binary summary  VM prob rtl?">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-29T00:05:35.000Z">
-<meta property="article:modified_time" content="2020-02-29T01:52:46.537Z">
+<meta property="article:modified_time" content="2020-02-29T15:16:40.841Z">
 <meta property="article:author" content="mhibio">
 <meta property="article:tag" content="d^3 ctf">
 <meta property="article:tag" content="vm">
@@ -215,10 +215,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-02-29 09:05:35 / Modified: 10:52:46" itemprop="dateCreated datePublished" datetime="2020-02-29T09:05:35+09:00">2020-02-29</time>
+              <time title="Created: 2020-02-29 09:05:35" itemprop="dateCreated datePublished" datetime="2020-02-29T09:05:35+09:00">2020-02-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-01 00:16:40" itemprop="dateModified" datetime="2020-03-01T00:16:40+09:00">2020-03-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -295,7 +301,7 @@
 <h3 id="op-0x28"><a class="header-anchor" href="#op-0x28">¶</a>op: 0x28</h3>
 <p><code>0x28 opcode</code>는 다음과 같은작업을 한다.</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sub_C26:</span><br><span class="line">  csp-&gt;stack_csp += <span class="number">0x50</span>LL;</span><br><span class="line">  LODWORD(csp-&gt;length) -= <span class="number">10</span>;</span><br></pre></td></tr></tbody></table></figure>
-<p><code>csp</code>를 0x50 만큼 증가시키는데, 2번 실행시킨다면 기존의 <code>csp</code>는 <code>0x7fffffffe240</code>에서 <code>0x7fffffffe2e0</code>를 가르킬 것 이다.</p>
+<p><code>csp</code>를 0x50 만큼 증가시키는데, 2번 실행시킨다면 기존의 <code>csp</code>는 <code>0x7fffffffe240</code>에서 <code>0x7fffffffe2e0</code>를 바뀔 것 이다.</p>
 <blockquote>
 <p><code>stack</code>을 <code>ret</code>보다 높은주소로 옮기고, 다른 <code>instruction</code>으로 <code>ret</code>을 덮을 수 있다.</p>
 </blockquote>
