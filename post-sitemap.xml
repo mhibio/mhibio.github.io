@@ -8,32 +8,8 @@
     </url>
 
     <url>
-        <loc>http://mhibio.github.io/2020/04/03/zer0pts-2020-syscall-kit/</loc>
-        <lastmod>2020-04-02T15:45:02.768Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://mhibio.github.io/2020/02/29/d-3-2019-babyrop/</loc>
-        <lastmod>2020-02-29T15:16:40.841Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://mhibio.github.io/2020/02/28/codegate-2018-7amebox1/</loc>
-        <lastmod>2020-02-29T01:24:06.368Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://mhibio.github.io/2020/02/06/Hacktm-2020-Trip-To-Trick/</loc>
-        <lastmod>2020-02-27T22:16:01.613Z</lastmod>
+        <loc>http://mhibio.github.io/2020/04/03/2019-cyberoc-yaratheflag/</loc>
+        <lastmod>2020-04-05T11:33:51.284Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -41,7 +17,39 @@
 
     <url>
         <loc>http://mhibio.github.io/2020/02/04/hacktm-2020-obey-the-rules/</loc>
-        <lastmod>2020-02-27T22:15:49.668Z</lastmod>
+        <lastmod>2020-04-05T03:37:16.756Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://mhibio.github.io/2020/02/06/Hacktm-2020-Trip-To-Trick/</loc>
+        <lastmod>2020-04-05T02:55:23.650Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://mhibio.github.io/2020/02/29/d-3-2019-babyrop/</loc>
+        <lastmod>2020-04-05T02:49:37.167Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://mhibio.github.io/2020/02/28/codegate-2018-7amebox1/</loc>
+        <lastmod>2020-04-05T02:47:53.904Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://mhibio.github.io/2020/04/03/zer0pts-2020-syscall-kit/</loc>
+        <lastmod>2020-04-05T02:45:48.646Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

