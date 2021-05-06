@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 06 May 2021 21:53:09 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 25 Apr 2021 22:21:34 +0900</lastBuildDate>
     
 	<atom:link href="https://mhibio.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -25,10 +25,10 @@
     
     <item>
       <title>Whoami 😁</title>
-      <link>https://mhibio.github.io/about/whoami/</link>
+      <link>https://mhibio.github.io/whoami/</link>
       <pubDate>Sun, 25 Apr 2021 22:21:34 +0900</pubDate>
       
-      <guid>https://mhibio.github.io/about/whoami/</guid>
+      <guid>https://mhibio.github.io/whoami/</guid>
       <description>✔ Play ctf in Team Defenit Name : Hyung il, Moon ( aka. mhibio )
 Skils : Pwnable, Reversing
 19 years old in Korean age
