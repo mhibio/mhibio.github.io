@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tech of Pwnable</title>
-    <link>https://example.com/</link>
-    <description>Recent content on Tech of Pwnable</description>
+    <title>ctf on Tech of Pwnable</title>
+    <link>https://example.com/categories/ctf/</link>
+    <description>Recent content in ctf on Tech of Pwnable</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Copyright 2021, mhibio 🔥</copyright>
     <lastBuildDate>Thu, 06 May 2021 21:53:09 +0900</lastBuildDate>
     
-	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.com/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,15 +21,6 @@
       <description>Excute execveat(0, &amp;quot;/bin/sh&amp;quot;, 0, 0, 0) after bypass seccomp filter.
  Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
 =&amp;gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !</description>
-    </item>
-    
-    <item>
-      <title>Whoami</title>
-      <link>https://example.com/about/whoami/</link>
-      <pubDate>Sun, 25 Apr 2021 22:21:34 +0900</pubDate>
-      
-      <guid>https://example.com/about/whoami/</guid>
-      <description>Play ctf in Team Defenit  Name : Hyung il, Moon ( aka. mhibio ) Skils : Pwnable, Reversing 19 years old in Korean age  Organizer  2020 Defenit CTF  🏆 Awards  2020, m0lecon CTF Teaser, 4rd 2020, ASIS CTF Quals, 2nd 2020, TSG CTF 2nd 2020, CyBRICS CTF 2nd 2020, SECCON CTF 1st 2020, Cyberoc Final 3th 2019, DVP Global Blockchain CTF, 6th  </description>
     </item>
     
   </channel>
