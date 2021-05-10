@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>  Hello🤚</title>
+    <title>Hello🤚</title>
     <link>https://mhibio.github.io/</link>
-    <description>Recent content on   Hello🤚</description>
+    <description>Recent content on Hello🤚</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
@@ -36,6 +36,7 @@ Excute execveat(0, &amp;quot;/bin/sh&amp;quot;, 0, 0, 0) after bypass seccomp fi
       <guid>https://mhibio.github.io/whoami/</guid>
       <description>✔ Play ctf in Team Defenit Name : Hyung il, Moon ( aka. mhibio )
 Skils : Pwnable, Reversing
+Interested in : Pwnable, Reversing, Crypto
 19 years old in Korean age
  ✔ Organizer  2020 Defenit CTF   ✔ Awards 2020, m0lecon CTF Teaser, 4rd
 2020, ASIS CTF Quals, 2nd
