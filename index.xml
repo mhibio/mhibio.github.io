@@ -18,9 +18,14 @@
       <pubDate>Thu, 06 May 2021 21:53:09 +0900</pubDate>
       
       <guid>https://mhibio.github.io/post/defcon-2021-segnalooo/</guid>
-      <description>Excute execveat(0, &amp;quot;/bin/sh&amp;quot;, 0, 0, 0) after bypass seccomp filter.
- Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
-=&amp;gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !</description>
+      <description>It&amp;rsquo;s the first problem I solved at Defcon.
+and, Because I played the defcon, I messed up the exam.😂
+Solved with Jsec, Epist
+ Tl;dr Trick on Seccomp Filter&amp;rsquo;s check.
+Brute force shellcoding challenge.
+Excute execveat(0, &amp;quot;/bin/sh&amp;quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
+1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.</description>
     </item>
     
     <item>

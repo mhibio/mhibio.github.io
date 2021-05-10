@@ -8,28 +8,43 @@
 	<meta name="theme-color" content="#494f5c">
 	<meta name="msapplication-TileColor" content="#494f5c">
 <meta itemprop="name" content="Defcon-2021-Segnalooo">
-<meta itemprop="description" content="Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
- Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
-=&gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !">
+<meta itemprop="description" content="It&rsquo;s the first problem I solved at Defcon.
+and, Because I played the defcon, I messed up the exam.😂
+Solved with Jsec, Epist
+ Tl;dr Trick on Seccomp Filter&rsquo;s check.
+Brute force shellcoding challenge.
+Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
+1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.">
 <meta itemprop="datePublished" content="2021-05-06T21:53:09&#43;09:00" />
 <meta itemprop="dateModified" content="2021-05-06T21:53:09&#43;09:00" />
-<meta itemprop="wordCount" content="472">
+<meta itemprop="wordCount" content="513">
 
 
 
 <meta itemprop="keywords" content="" /><meta property="og:title" content="Defcon-2021-Segnalooo" />
-<meta property="og:description" content="Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
- Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
-=&gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !" />
+<meta property="og:description" content="It&rsquo;s the first problem I solved at Defcon.
+and, Because I played the defcon, I messed up the exam.😂
+Solved with Jsec, Epist
+ Tl;dr Trick on Seccomp Filter&rsquo;s check.
+Brute force shellcoding challenge.
+Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
+1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://mhibio.github.io/post/defcon-2021-segnalooo/" />
 <meta property="article:published_time" content="2021-05-06T21:53:09+09:00" />
 <meta property="article:modified_time" content="2021-05-06T21:53:09+09:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Defcon-2021-Segnalooo"/>
-<meta name="twitter:description" content="Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
- Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX ) Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.
-=&gt; There is two Problems. ( Seccomp filter, ud2 instruction )   Seccomp Filter line CODE JT JF K ================================= 0000: 0x20 0x00 0x00 0x00000004 A = arch 0001: 0x15 0x00 0x0a 0xc000003e if (A !"/>
+<meta name="twitter:description" content="It&rsquo;s the first problem I solved at Defcon.
+and, Because I played the defcon, I messed up the exam.😂
+Solved with Jsec, Epist
+ Tl;dr Trick on Seccomp Filter&rsquo;s check.
+Brute force shellcoding challenge.
+Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
+1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -74,12 +89,20 @@
 	<main class="site-main section-inner thin animated fadeIn faster">
 		<h1>Defcon-2021-Segnalooo</h1>
 		<div class="content">
-			<p>Excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code> after bypass seccomp filter.</p>
+			<p>It&rsquo;s the first problem I solved at Defcon.<br>
+and, Because I played the defcon, I messed up the exam.😂</p>
+<p><strong>Solved with <code>Jsec</code>, <code>Epist</code></strong></p>
+<hr>
+<h2 id="tldr">Tl;dr<a href="#tldr" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p><strong><code>Trick</code> on Seccomp Filter&rsquo;s check.</strong><br>
+<strong><code>Brute force shellcoding</code> challenge.</strong><br>
+<strong>Excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code> after bypass seccomp filter.</strong></p>
 <hr>
 <h2 id="binary">Binary<a href="#binary" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <ol start="0">
 <li>Set Signal Handler on Signum 5 ( <code>SIGTRAP</code> )</li>
-<li>Allocate Memory twice ( addr1 : <code>0x10XXXXXXXXXX</code>, addr2 : <code>0x5XXXXXXXXXXX</code> )</li>
+<li>Allocate Memory twice ( addr1 : <code>0x10XXXXXXXXXX</code>, addr2 : <code>0x5XXXXXXXXXXX</code> )<br>
+1-1. Input out Shellcode.</li>
 <li>Munmap all Memory except addr1, addr2</li>
 <li>Call Signal Handler with <code>int3</code></li>
 <li>After Signal Handler, <code>IP</code> returns to our Shellcode.<br>
@@ -111,14 +134,14 @@ or, <code>Instruction_Pointer(IP)</code> have to be smaller than 0x80000000</p>
 <p><strong>One interesting thing is that Seccomp only do 4 bytes of ip check.</strong></p>
 </blockquote>
 <p>So we can bypass <strong><code>IP CHECK</code></strong> by using a syscall gadget in <code>0x10XXXXXXXXXX</code>.<br>
-( 4 bytes of addr2 = <code>0x10XXXXXXXXXX</code> are always smaller than <code>0x80000000</code>. ).</p>
+( Binary always causes 4 bytes of addr2 address (<code>0x10XXXXXXXXXX</code>) to be smaller than <code>0x80000000</code> )</p>
 <hr>
 <h2 id="ud2-instruction">ud2 instruction<a href="#ud2-instruction" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p><code>ud2 instruction</code> means undefined instruction.<br>
 when <code>IP</code> returns to our shellcode, <code>ud2</code> instruction is executed.<br>
 -&gt; Process stopped with exit code -4 ( <code>SIGILL</code> )</p>
 <p>But, I can execute only 1 instruction.<br>
-<strong>if I execute <code>icebp</code>, I can escape <code>ud2</code> instruction.</strong></p>
+<strong>if I execute <code>icebp (0xf1)</code>, I can escape <code>ud2</code> instruction.</strong></p>
 <hr>
 <h2 id="leak-memory">leak memory<a href="#leak-memory" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>if <code>nanosleep's rdi</code> is invalid memory, return <code>0xfffffffffffffff2</code>.<br>
