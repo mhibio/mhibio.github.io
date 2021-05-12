@@ -52,15 +52,14 @@ Excute execveat(0, &amp;quot;/bin/sh&amp;quot;, 0, 0, 0) after bypass seccomp fi
       <guid>https://mhibio.github.io/whoami/</guid>
       <description>✔ Play ctf in Team Defenit Name : Hyung il, Moon ( aka. mhibio )
 Skils : Pwnable, Reversing
-Interested in : Pwnable, Reversing, Crypto
+Interested in : Pwnable, Reversing, Crypto, BlockChain, SmartContract
 19 years old in Korean age
  ✔ Organizer  2020 Defenit CTF   ✔ Awards 2020, m0lecon CTF Teaser, 4rd
 2020, ASIS CTF Quals, 2nd
 2020, TSG CTF 2nd
 2020, CyBRICS CTF 2nd
 2020, SECCON CTF 1st
-2020, Cyberoc Final 3th
-2019, DVP Global Blockchain CTF, 6th</description>
+2020, Cyberoc Final 3th</description>
     </item>
     
   </channel>
