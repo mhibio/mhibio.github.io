@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Whoami on mhibio</title>
+    <link>https://mhibio.github.io/tags/whoami/</link>
+    <description>Recent content in Whoami on mhibio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Apr 2021 22:21:34 +0900</lastBuildDate>
+    
+	<atom:link href="https://mhibio.github.io/tags/whoami/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Whoami 😁</title>
+      <link>https://mhibio.github.io/whoami/</link>
+      <pubDate>Sun, 25 Apr 2021 22:21:34 +0900</pubDate>
+      
+      <guid>https://mhibio.github.io/whoami/</guid>
+      <description>Play ctf in Team Defenit Name : Hyung il, Moon ( aka. mhibio )
+Skils : [ Pwnable, Reversing ]
+Interested in : [ Pwnable, Reversing, Crypto, BlockChain, SmartContract ]
+19 years old in Korean age
+Organizer  2020 Defenit CTF  Awards 2020, m0lecon CTF Teaser, 4rd
+2020, ASIS CTF Quals, 2nd
+2020, TSG CTF 2nd
+2020, CyBRICS CTF 2nd
+2020, SECCON CTF 1st
+2020, Cyberoc Final 3th
+2019, DVP Global Blockchain CTF, 6th</description>
+    </item>
+    
+  </channel>
+</rss>
