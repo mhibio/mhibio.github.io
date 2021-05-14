@@ -15,7 +15,7 @@ Solved with Jsec, Epist
 Brute force shellcoding challenge.
 Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
  Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
-1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.">
+1-1. Input our Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.">
 <meta itemprop="datePublished" content="2021-05-06T21:53:09&#43;09:00" />
 <meta itemprop="dateModified" content="2021-05-06T21:53:09&#43;09:00" />
 <meta itemprop="wordCount" content="513">
@@ -30,7 +30,7 @@ Solved with Jsec, Epist
 Brute force shellcoding challenge.
 Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
  Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
-1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode." />
+1-1. Input our Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://mhibio.github.io/post/defcon-2021-segnalooo/" />
 <meta property="article:published_time" content="2021-05-06T21:53:09+09:00" />
@@ -44,7 +44,7 @@ Solved with Jsec, Epist
 Brute force shellcoding challenge.
 Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
  Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
-1-1. Input out Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode."/>
+1-1. Input our Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -102,7 +102,7 @@ and, Because I played the defcon, I messed up the exam.😂</p>
 <ol start="0">
 <li>Set Signal Handler on Signum 5 ( <code>SIGTRAP</code> )</li>
 <li>Allocate Memory twice ( addr1 : <code>0x10XXXXXXXXXX</code>, addr2 : <code>0x5XXXXXXXXXXX</code> )<br>
-1-1. Input out Shellcode.</li>
+1-1. Input our Shellcode.</li>
 <li>Munmap all Memory except addr1, addr2</li>
 <li>Call Signal Handler with <code>int3</code></li>
 <li>After Signal Handler, <code>IP</code> returns to our Shellcode.<br>
