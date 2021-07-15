@@ -136,8 +136,8 @@ or, <code>Instruction_Pointer(IP)</code> have to be smaller than 0x80000000</p>
 <p><code>ud2 instruction</code> means undefined instruction.<br>
 when <code>IP</code> returns to our shellcode, <code>ud2</code> instruction is executed.<br>
 -&gt; Process stopped with exit code -4 ( <code>SIGILL</code> )</p>
-<p>But, I can execute only 1 instruction.<br>
-<strong>if I execute <code>icebp (0xf1)</code>, I can escape <code>ud2</code> instruction.</strong></p>
+<p>But, we can execute only 1 instruction.<br>
+<strong>if we execute <code>icebp (0xf1)</code>, we can escape <code>ud2</code> instruction.</strong></p>
 <h2 id="leak-memory">leak memory</h2>
 <p>if <code>nanosleep's rdi</code> is invalid memory, return <code>0xfffffffffffffff2</code>.<br>
 else <code>nanosleep's rdi</code> is valid memory but failed <code>nanosleep</code>, return <code>0xffffffffffffffea</code>.</p>
