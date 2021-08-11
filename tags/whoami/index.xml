@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Whoami on mhibio</title>
-    <link>https://mhibio.github.io/tags/whoami/</link>
+    <link>https://blog.rwx.pw/tags/whoami/</link>
     <description>Recent content in Whoami on mhibio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>mhibio</copyright>
     <lastBuildDate>Sun, 25 Apr 2021 22:21:34 +0900</lastBuildDate>
     
-	<atom:link href="https://mhibio.github.io/tags/whoami/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.rwx.pw/tags/whoami/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Whoami 😁</title>
-      <link>https://mhibio.github.io/whoami/</link>
+      <link>https://blog.rwx.pw/whoami/</link>
       <pubDate>Sun, 25 Apr 2021 22:21:34 +0900</pubDate>
       
-      <guid>https://mhibio.github.io/whoami/</guid>
+      <guid>https://blog.rwx.pw/whoami/</guid>
       <description>Play ctf in Team Defenit Name : Hyung il, Moon ( aka. mhibio )
 Skils : [ Pwnable, Reversing ]
 Interested in : [ Pwnable, Reversing, Crypto, BlockChain, SmartContract ]

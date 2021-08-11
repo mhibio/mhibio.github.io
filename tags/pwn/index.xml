@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pwn on mhibio</title>
-    <link>https://mhibio.github.io/tags/pwn/</link>
+    <link>https://blog.rwx.pw/tags/pwn/</link>
     <description>Recent content in pwn on mhibio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>mhibio</copyright>
     <lastBuildDate>Thu, 06 May 2021 21:53:09 +0900</lastBuildDate>
     
-	<atom:link href="https://mhibio.github.io/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.rwx.pw/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Defcon-2021-Segnalooo</title>
-      <link>https://mhibio.github.io/post/defcon-2021-segnalooo/</link>
+      <link>https://blog.rwx.pw/post/defcon-2021-segnalooo/</link>
       <pubDate>Thu, 06 May 2021 21:53:09 +0900</pubDate>
       
-      <guid>https://mhibio.github.io/post/defcon-2021-segnalooo/</guid>
+      <guid>https://blog.rwx.pw/post/defcon-2021-segnalooo/</guid>
       <description>It&amp;rsquo;s the first problem I solved at Defcon.
 and, Because I played the defcon, I messed up the exam.😂
 Solved with Jsec, Epist
