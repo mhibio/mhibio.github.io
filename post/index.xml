@@ -6,23 +6,10 @@
     <description>Recent content in Post on mhibio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 09 Jul 2021 08:38:29 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 May 2021 19:48:02 +0900</lastBuildDate>
     
 	<atom:link href="https://mhibio.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Codeblock Test</title>
-      <link>https://mhibio.github.io/post/codeblock-test/</link>
-      <pubDate>Fri, 09 Jul 2021 08:38:29 +0900</pubDate>
-      
-      <guid>https://mhibio.github.io/post/codeblock-test/</guid>
-      <description>String
-Using indents:
-text text text  Fenced code block:
-text text &amp;lt;tag&amp;gt; Fenced code block with language (lineNumbersInTable = false):
-// JavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJavaJava public final class String implements java.io.Serializable, Comparable&amp;lt;String&amp;gt;, CharSequence { /** The value is used for character storage. */ private final char value[]; /** The offset is the first index of the storage that is used. */ private final int offset; /** The count is the number of characters in the String.</description>
-    </item>
     
     <item>
       <title>Des-Encryption.c</title>
