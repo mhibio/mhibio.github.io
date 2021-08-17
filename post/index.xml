@@ -6,17 +6,17 @@
     <description>Recent content in Post on mhibio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 12 May 2021 19:48:02 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Aug 2021 08:12:48 +0900</lastBuildDate>
     
 	<atom:link href="https://mhibio.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Des-Encryption.c</title>
-      <link>https://mhibio.github.io/post/des-encryption/</link>
+      <link>https://mhibio.github.io/post/des-encryption.c/</link>
       <pubDate>Wed, 12 May 2021 19:48:02 +0900</pubDate>
       
-      <guid>https://mhibio.github.io/post/des-encryption/</guid>
+      <guid>https://mhibio.github.io/post/des-encryption.c/</guid>
       <description>Code with poor quality. Please understand.
 Only 8 bytes can be encrypted.
 Operational modes such as ecb and cbc will be implemented later.

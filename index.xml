@@ -31,10 +31,10 @@
     
     <item>
       <title>Des-Encryption.c</title>
-      <link>https://mhibio.github.io/post/des-encryption/</link>
+      <link>https://mhibio.github.io/post/des-encryption.c/</link>
       <pubDate>Wed, 12 May 2021 19:48:02 +0900</pubDate>
       
-      <guid>https://mhibio.github.io/post/des-encryption/</guid>
+      <guid>https://mhibio.github.io/post/des-encryption.c/</guid>
       <description>Code with poor quality. Please understand.
 Only 8 bytes can be encrypted.
 Operational modes such as ecb and cbc will be implemented later.
@@ -59,7 +59,7 @@ Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 
     </item>
     
     <item>
-      <title>Whoami 😁</title>
+      <title>About Me</title>
       <link>https://mhibio.github.io/whoami/</link>
       <pubDate>Sun, 25 Apr 2021 22:21:34 +0900</pubDate>
       
