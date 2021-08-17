@@ -2,22 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Coding on mhibio</title>
-    <link>https://blog.rwx.pw/tags/coding/</link>
+    <link>https://mhibio.github.io/tags/coding/</link>
     <description>Recent content in Coding on mhibio</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>mhibio</copyright>
+    <language>en-US</language>
     <lastBuildDate>Wed, 12 May 2021 19:48:02 +0900</lastBuildDate>
     
-	<atom:link href="https://blog.rwx.pw/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mhibio.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Des-Encryption.c</title>
-      <link>https://blog.rwx.pw/post/des-encryption/</link>
+      <link>https://mhibio.github.io/post/des-encryption/</link>
       <pubDate>Wed, 12 May 2021 19:48:02 +0900</pubDate>
       
-      <guid>https://blog.rwx.pw/post/des-encryption/</guid>
+      <guid>https://mhibio.github.io/post/des-encryption/</guid>
       <description>Code with poor quality. Please understand.
 Only 8 bytes can be encrypted.
 Operational modes such as ecb and cbc will be implemented later.
