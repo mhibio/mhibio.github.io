@@ -372,11 +372,26 @@ section.main .content .title-container .initials a {
 section.main .content .title-container .initials a:hover {
   color: #333;
 }
+
+section.main .content .tags {
+  font-size: 13px;
+  font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  padding: 3px;
+  border-radius: 3px;
+  font-weight: 700;
+  background-color: rgb(138, 248, 147);
+  color: #333;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 6px 3px 0 0;
+}
+
 section.main .content .page-heading {
   font-size: 18px;
   font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;
   letter-spacing: -0.005rem;
-  padding: 3px;
+  padding: 3px 6px 3px 6px;
   border-radius: 3px;
   font-weight: 700;
   background-color: rgb(202, 199, 199);
@@ -527,7 +542,7 @@ section.main {
   }
   section.header {
     padding-top: 60px;
-    padding-bottom: 60px;
+    padding-bottom: 50px;
   }
   section.icons {
     padding-top: 60px;
@@ -614,6 +629,7 @@ section.main .content p .literal {
   font-family: 'Ubuntu Mono', 'Menlo', monospace;
   font-size: 1rem;
   line-height: 17px;
+  border-radius: 5px;
   background-color: #f7f7f7;
 }
 section.main .content .markdown code,
