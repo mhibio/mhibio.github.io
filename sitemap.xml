@@ -88,6 +88,26 @@
   </url>
   
   <url>
+    <loc>https://mhibio.github.io/post/2020-0ctf/tctf-chromium-rce/</loc>
+    <lastmod>2020-05-19T12:50:09+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mhibio.github.io/tags/browser/</loc>
+    <lastmod>2020-05-19T12:50:09+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mhibio.github.io/tags/chrome/</loc>
+    <lastmod>2020-05-19T12:50:09+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mhibio.github.io/tags/v8/</loc>
+    <lastmod>2020-05-19T12:50:09+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mhibio.github.io/categories/</loc>
   </url>
   
